@@ -63,8 +63,13 @@ public class MessageEditor : EditorWindow
 
         Undo.RegisterCreatedObjectUndo(newObject, name);
 
-        if (newObject.TryGetComponent(out Text text)) {
+        if (newObject.TryGetComponent(out Text text)) 
+        {
             text.text = letter.ToString();
+
+            text.alignment = TextAnchor.MiddleCenter;
+
+            text.fontSize = 26;
         }
         if (newObject.TryGetComponent(out UnsettledChar unsettled)) {
             unsettled.Setting(6, 5f);

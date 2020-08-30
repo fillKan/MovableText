@@ -5,6 +5,8 @@ public class MessageEditor : EditorWindow
 {
     private static Vector2 WindowFixSize = new Vector2(415, 290);
 
+    private readonly Rect OneBlockRECT = new Rect(2.5f, 63.5f, 409f, 18f);
+
     private string mName;
     private string mMessage;
 
@@ -26,8 +28,10 @@ public class MessageEditor : EditorWindow
         GUILayout.Space(8f);
 
         GUILayout.Label("Message", EditorStyles.label);
-        mMessage = GUILayout.TextField(mMessage);
+        mMessage = EditorGUI.TextField(OneBlockRECT, mMessage);
 
+        GUILayout.Space(21f);
+        
         if (GUILayout.Button("Create!")) {
             Create();
         }

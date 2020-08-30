@@ -8,6 +8,8 @@ public class UnsettledText : MonoBehaviour
     [SerializeField][TextArea]
     private string mMessage;
 
+    public void SetMessage(string message) => mMessage = message;
+
     private void Start()
     {
         for (int i = 0; i < transform.childCount; i++)

@@ -10,6 +10,7 @@ public class MessageEditor : EditorWindow
 
     private string mName;
     private string mMessage;
+    private Font mFont;
 
     [MenuItem("MessageEditor/Create Unsettled")]
     private static void Init()
@@ -32,7 +33,10 @@ public class MessageEditor : EditorWindow
         mMessage = EditorGUI.TextField(OneBlockRECT, mMessage);
 
         GUILayout.Space(21f);
-        
+
+        GUILayout.Label("Font", EditorStyles.label);
+        mFont = (Font)EditorGUILayout.ObjectField(mFont, typeof(Font), true);
+
         if (GUILayout.Button("Create!")) {
             Create();
         }
@@ -69,7 +73,7 @@ public class MessageEditor : EditorWindow
 
             text.alignment = TextAnchor.MiddleCenter;
 
-            text.fontSize = 26;
+            text.fontSize = 26; text.font = mFont;
         }
         if (newObject.TryGetComponent(out UnsettledChar unsettled)) {
             unsettled.Setting(6, 5f);

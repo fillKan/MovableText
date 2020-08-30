@@ -8,6 +8,8 @@ public class MessageEditor : EditorWindow
 
     private readonly Rect OneBlockRECT = new Rect(2.5f, 63.5f, 409f, 18f);
 
+    private const int ODD = 1;
+
     private string mName;
     private string mMessage;
     private Transform mParent;
@@ -62,12 +64,14 @@ public class MessageEditor : EditorWindow
         if (newObject.TryGetComponent(out UnsettledText text)) {
             text.SetMessage(mMessage);
         }
+        float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : 10f;
+
         for (int i = 0; i < mMessage.Length; i++)
         {
             GameObject createChar = CreateUnSettledChar(mMessage[i]);
 
             createChar.transform.parent = newObject.transform;
-            createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * 20f, 0);
+            createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * 20f + charOffset, 0);
         }
     }
     private GameObject CreateUnSettledChar(char letter)

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class MessageEditor : EditorWindow
 {
@@ -45,5 +46,18 @@ public class MessageEditor : EditorWindow
         if (newObject.TryGetComponent(out UnsettledText text)) {
             text.SetMessage(mMessage);
         }
+    }
+    private GameObject CreateUnSettledChar(char letter)
+    {
+        string name = $"Character[{letter}]";
+
+        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(UnsettledChar));
+
+        Undo.RegisterCreatedObjectUndo(newObject, name);
+
+        if (newObject.TryGetComponent(out Text text)) {
+            text.text = letter.ToString();
+        }
+        return newObject;
     }
 }

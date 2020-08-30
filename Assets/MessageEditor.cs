@@ -57,6 +57,7 @@ public class MessageEditor : EditorWindow
         Undo.RegisterCreatedObjectUndo(newObject, mName);
 
         newObject.transform.parent = mParent;
+        newObject.transform.localPosition = Vector3.zero;
 
         if (newObject.TryGetComponent(out UnsettledText text)) {
             text.SetMessage(mMessage);
@@ -65,9 +66,8 @@ public class MessageEditor : EditorWindow
         {
             GameObject createChar = CreateUnSettledChar(mMessage[i]);
 
-            createChar.transform.localPosition = new Vector2(i * 20f, 0);
-
             createChar.transform.parent = newObject.transform;
+            createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * 20f, 0);
         }
     }
     private GameObject CreateUnSettledChar(char letter)

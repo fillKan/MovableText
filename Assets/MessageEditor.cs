@@ -24,5 +24,19 @@ public class MessageEditor : EditorWindow
 
         GUILayout.Label("Message", EditorStyles.label);
         mMessage = GUILayout.TextField(mMessage);
+
+        if (GUILayout.Button("Create!")) {
+            Create();
+        }
+    }
+    private void Create()
+    {
+        GameObject newObject = new GameObject(mName, typeof(RectTransform), typeof(UnsettledText));
+
+        Undo.RegisterCreatedObjectUndo(newObject, mName);
+
+        if (newObject.TryGetComponent(out UnsettledText text)) {
+            text.SetMessage(mMessage);
+        }
     }
 }

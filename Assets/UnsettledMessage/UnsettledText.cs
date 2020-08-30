@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbnormalityText : MonoBehaviour
+public class UnsettledText : MonoBehaviour
 {
     [SerializeField][TextArea]
     private string mMessage;

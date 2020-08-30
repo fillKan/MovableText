@@ -3,6 +3,8 @@ using UnityEditor;
 
 public class MessageEditor : EditorWindow
 {
+    private static Vector2 WindowFixSize = new Vector2(415, 290);
+
     private string mName;
     private string mMessage;
 
@@ -12,7 +14,8 @@ public class MessageEditor : EditorWindow
         MessageEditor window = EditorWindow.GetWindow(typeof(MessageEditor)) as MessageEditor;
 
         window.Show();
-        window.minSize = Vector2.one * 200f;
+        window.minSize = WindowFixSize;
+        window.maxSize = WindowFixSize;
     }
 
     private void OnGUI()

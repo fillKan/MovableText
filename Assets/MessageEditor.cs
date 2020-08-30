@@ -4,10 +4,6 @@ using UnityEngine.UI;
 
 public class MessageEditor : EditorWindow
 {
-    private static Vector2 WindowFixSize = new Vector2(415, 290);
-
-    private readonly Rect OneBlockRECT = new Rect(2.5f, 63.5f, 409f, 18f);
-
     private const int ODD = 1;
 
     private string mName;
@@ -23,8 +19,6 @@ public class MessageEditor : EditorWindow
         MessageEditor window = EditorWindow.GetWindow(typeof(MessageEditor)) as MessageEditor;
 
         window.Show();
-        window.minSize = WindowFixSize;
-        window.maxSize = WindowFixSize;
     }
 
     private void OnGUI()
@@ -35,7 +29,7 @@ public class MessageEditor : EditorWindow
         GUILayout.Space(8f);
 
         GUILayout.Label("Message", EditorStyles.label);
-        mMessage = EditorGUI.TextField(OneBlockRECT, mMessage);
+        mMessage = EditorGUI.TextField(new Rect(2.5f, 63.5f, EditorGUIUtility.currentViewWidth - 7f, 18f), mMessage);
 
         GUILayout.Space(21f);
 

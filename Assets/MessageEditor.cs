@@ -10,6 +10,8 @@ public class MessageEditor : EditorWindow
 
     private string mName;
     private string mMessage;
+    private Transform mParent;
+
     private Font  mFont;
     private Color mColor = Color.white;
 
@@ -38,6 +40,9 @@ public class MessageEditor : EditorWindow
         GUILayout.Label("Font", EditorStyles.label);
         mFont = (Font)EditorGUILayout.ObjectField(mFont, typeof(Font), true);
 
+        GUILayout.Label("Parent Object", EditorStyles.label);
+        mParent = (Transform)EditorGUILayout.ObjectField(mParent, typeof(Transform), true);
+
         GUILayout.Label("Color", EditorStyles.label);
         mColor = EditorGUILayout.ColorField(mColor);
 
@@ -50,6 +55,8 @@ public class MessageEditor : EditorWindow
         GameObject newObject = new GameObject(mName, typeof(RectTransform), typeof(UnsettledText));
 
         Undo.RegisterCreatedObjectUndo(newObject, mName);
+
+        newObject.transform.parent = mParent;
 
         if (newObject.TryGetComponent(out UnsettledText text)) {
             text.SetMessage(mMessage);

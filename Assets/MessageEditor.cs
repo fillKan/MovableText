@@ -46,6 +46,14 @@ public class MessageEditor : EditorWindow
         if (newObject.TryGetComponent(out UnsettledText text)) {
             text.SetMessage(mMessage);
         }
+        for (int i = 0; i < mMessage.Length; i++)
+        {
+            GameObject createChar = CreateUnSettledChar(mMessage[i]);
+
+            createChar.transform.localPosition = new Vector2(i * 20f, 0);
+
+            createChar.transform.parent = newObject.transform;
+        }
     }
     private GameObject CreateUnSettledChar(char letter)
     {
@@ -57,6 +65,9 @@ public class MessageEditor : EditorWindow
 
         if (newObject.TryGetComponent(out Text text)) {
             text.text = letter.ToString();
+        }
+        if (newObject.TryGetComponent(out UnsettledChar unsettled)) {
+            unsettled.Setting(6, 5f);
         }
         return newObject;
     }

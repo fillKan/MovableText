@@ -9,6 +9,10 @@ public class UnsettledChar : MonoBehaviour
 
     private IEnumerator mEUpdate;
 
+    public void Setting(uint waitFrame, float vibrato) {
+        mWaitFrame = waitFrame; mVibrato = vibrato;
+    }
+
     private void OnEnable()
     {
         StartCoroutine(mEUpdate = EUpdate());

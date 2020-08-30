@@ -3,6 +3,9 @@ using UnityEditor;
 
 public class MessageEditor : EditorWindow
 {
+    private string mName;
+    private string mMessage;
+
     [MenuItem("MessageEditor/Create Unsettled")]
     private static void Init()
     {
@@ -14,6 +17,12 @@ public class MessageEditor : EditorWindow
 
     private void OnGUI()
     {
-        Debug.Log("Open!");
+        GUILayout.Label("Object Name", EditorStyles.label);
+        mName = GUILayout.TextField(mName);
+
+        GUILayout.Space(8f);
+
+        GUILayout.Label("Message", EditorStyles.label);
+        mMessage = GUILayout.TextField(mMessage);
     }
 }

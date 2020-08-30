@@ -7,8 +7,6 @@ public class AbnormalityChar : MonoBehaviour
     [SerializeField] private  uint mWaitFrame;
     [SerializeField] private float mVibrato;
 
-    private readonly Vector3 NormalRotation = new Vector3(0f, 0f, 1f);
-
     private IEnumerator mEUpdate;
 
     private void OnEnable()
@@ -28,7 +26,7 @@ public class AbnormalityChar : MonoBehaviour
         {
             for (uint i = 0; i < mWaitFrame; i++) { yield return null; }
 
-            transform.localRotation = Quaternion.Euler(NormalRotation * mVibrato * Random.Range(-1f, 1f));
+            transform.localRotation = Quaternion.Euler(Vector3.forward * mVibrato * Random.Range(-1f, 1f));
         }
     }
 }

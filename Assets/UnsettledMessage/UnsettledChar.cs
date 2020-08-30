@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbnormalityChar : MonoBehaviour
+public class UnsettledChar : MonoBehaviour
 {
     [SerializeField] private  uint mWaitFrame;
     [SerializeField] private float mVibrato;

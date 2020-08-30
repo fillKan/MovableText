@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 300261495}
   - component: {fileID: 300261496}
   m_Layer: 5
-  m_Name: AbnomalityText
+  m_Name: UnsettledText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 850402348}
   - component: {fileID: 850402350}
   m_Layer: 5
-  m_Name: AbnomalityChar
+  m_Name: UnsettledChar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 1381051758}
   - component: {fileID: 1381051757}
   m_Layer: 5
-  m_Name: AbnomalityChar (1)
+  m_Name: UnsettledChar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 1639940303}
   - component: {fileID: 1639940302}
   m_Layer: 5
-  m_Name: AbnomalityChar (2)
+  m_Name: UnsettledChar (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

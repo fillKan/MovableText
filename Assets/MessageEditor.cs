@@ -11,6 +11,7 @@ public class MessageEditor : EditorWindow
     private string mName;
     private string mMessage;
     private Transform mParent;
+    private Vector3 mPosition;
 
     private Font  mFont;
     private Color mColor = Color.white;
@@ -47,6 +48,8 @@ public class MessageEditor : EditorWindow
         GUILayout.Label("Font Size", EditorStyles.label);
         mFontSize = EditorGUILayout.IntField(mFontSize);
 
+        mPosition = EditorGUILayout.Vector3Field("Position", mPosition);
+
         GUILayout.Label("Color", EditorStyles.label);
         mColor = EditorGUILayout.ColorField(mColor);
 
@@ -61,7 +64,7 @@ public class MessageEditor : EditorWindow
         Undo.RegisterCreatedObjectUndo(newObject, mName);
 
         newObject.transform.parent = mParent;
-        newObject.transform.localPosition = Vector3.zero;
+        newObject.transform.localPosition = mPosition;
 
         if (newObject.TryGetComponent(out UnsettledText text)) {
             text.SetMessage(mMessage);

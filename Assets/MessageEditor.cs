@@ -6,6 +6,8 @@ public class MessageEditor : EditorWindow
 {
     private const int ODD = 1;
 
+    private float mLetterSpacing = 20f;
+    private int mFontSize = 26;
     private string mName;
     private string mMessage;
     private Transform mParent;
@@ -39,10 +41,16 @@ public class MessageEditor : EditorWindow
         GUILayout.Label("Parent Object", EditorStyles.label);
         mParent = (Transform)EditorGUILayout.ObjectField(mParent, typeof(Transform), true);
 
+        GUILayout.Label("Letter Spacing", EditorStyles.label);
+        mLetterSpacing = EditorGUILayout.FloatField(mLetterSpacing);
+
+        GUILayout.Label("Font Size", EditorStyles.label);
+        mFontSize = EditorGUILayout.IntField(mFontSize);
+
         GUILayout.Label("Color", EditorStyles.label);
         mColor = EditorGUILayout.ColorField(mColor);
 
-        if (GUILayout.Button("Create!")) {
+        if (GUILayout.Button("Create!") && !EditorApplication.isPlaying) {
             Create();
         }
     }
@@ -58,14 +66,14 @@ public class MessageEditor : EditorWindow
         if (newObject.TryGetComponent(out UnsettledText text)) {
             text.SetMessage(mMessage);
         }
-        float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : 10f;
+        float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : mLetterSpacing * 0.5f;
 
         for (int i = 0; i < mMessage.Length; i++)
         {
             GameObject createChar = CreateUnSettledChar(mMessage[i]);
 
             createChar.transform.parent = newObject.transform;
-            createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * 20f + charOffset, 0);
+            createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * mLetterSpacing + charOffset, 0);
         }
     }
     private GameObject CreateUnSettledChar(char letter)
@@ -82,7 +90,7 @@ public class MessageEditor : EditorWindow
 
             text.alignment = TextAnchor.MiddleCenter;
 
-            text.fontSize = 26; text.font = mFont;
+            text.fontSize = mFontSize; text.font = mFont;
 
             text.color = mColor;
         }

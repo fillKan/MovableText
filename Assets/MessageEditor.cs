@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class MessageEditor : EditorWindow
 {
     private const int ODD = 1;
-
+    private float mVibration = 5f;
+    private uint mWaitFrame = 6;
     private float mLetterSpacing = 20f;
     private int mFontSize = 26;
     private string mName;
@@ -46,7 +47,13 @@ public class MessageEditor : EditorWindow
         mLetterSpacing = EditorGUILayout.FloatField(mLetterSpacing);
 
         GUILayout.Label("Font Size", EditorStyles.label);
-        mFontSize = EditorGUILayout.IntField(mFontSize);
+        mFontSize = EditorGUILayout.IntField(mFontSize);        
+
+        GUILayout.Label("Vibration", EditorStyles.label);
+        mVibration = EditorGUILayout.Slider(mVibration, 0f, 180f);
+
+        GUILayout.Label("Wait Frame", EditorStyles.label);
+        mWaitFrame = (uint)EditorGUILayout.IntSlider((int)mWaitFrame, 0, 60);
 
         mPosition = EditorGUILayout.Vector3Field("Position", mPosition);
 
@@ -98,7 +105,7 @@ public class MessageEditor : EditorWindow
             text.color = mColor;
         }
         if (newObject.TryGetComponent(out UnsettledChar unsettled)) {
-            unsettled.Setting(6, 5f);
+            unsettled.Setting(mWaitFrame, mVibration);
         }
         return newObject;
     }

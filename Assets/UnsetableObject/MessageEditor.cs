@@ -6,7 +6,8 @@ public class MessageEditor : EditorWindow
 {
     private const int ODD = 1;
 
-    private float mVibration = 5f;
+    private float mVibration = 1f;
+    private float mRotation  = 5f;
     private float mLetterSpacing = 20f;
     
     private uint mWaitFrame =  6;
@@ -60,7 +61,10 @@ public class MessageEditor : EditorWindow
         mUnstable = (UnstableStyle)EditorGUILayout.EnumPopup("Unstable Style", mUnstable);
 
         GUILayout.Label("Vibration", EditorStyles.label);
-        mVibration = EditorGUILayout.Slider(mVibration, 0f, 180f);
+        mVibration = EditorGUILayout.Slider(mVibration, 0.01f, 2f);
+
+        GUILayout.Label("Rotation", EditorStyles.label);
+        mRotation = EditorGUILayout.Slider(mRotation, 0f, 180f);
 
         GUILayout.Label("Wait Frame", EditorStyles.label);
         mWaitFrame = (uint)EditorGUILayout.IntSlider((int)mWaitFrame, 0, 60);
@@ -118,7 +122,7 @@ public class MessageEditor : EditorWindow
         }
         if (newObject.TryGetComponent(out UnsetableObject unsettled)) 
         {
-            unsettled.Setting(mWaitFrame, mVibration, mUnstable);
+            unsettled.Setting(mWaitFrame, mVibration, mRotation, mUnstable);
         }
         return newObject;
     }

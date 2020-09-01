@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnsettledChar : MonoBehaviour
+public class UnsetableObject : MonoBehaviour
 {
     [SerializeField] private  uint mWaitFrame;
     [SerializeField] private float mVibrato;

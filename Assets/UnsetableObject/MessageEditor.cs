@@ -74,14 +74,14 @@ public class MessageEditor : EditorWindow
     }
     private void Create()
     {
-        GameObject newObject = new GameObject(mName, typeof(RectTransform), typeof(UnsettledText));
+        GameObject newObject = new GameObject(mName, typeof(RectTransform), typeof(UnsetableText));
 
         Undo.RegisterCreatedObjectUndo(newObject, mName);
 
         newObject.transform.parent = mCanvas.transform;
         newObject.transform.localPosition = mPosition;
 
-        if (newObject.TryGetComponent(out UnsettledText text)) {
+        if (newObject.TryGetComponent(out UnsetableText text)) {
             text.SetMessage(mMessage);
         }
         float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : mLetterSpacing * 0.5f;
@@ -98,7 +98,7 @@ public class MessageEditor : EditorWindow
     {
         string name = $"Character[{letter}]";
 
-        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(UnsettledChar));
+        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(UnsetableObject));
 
         Undo.RegisterCreatedObjectUndo(newObject, name);
 
@@ -114,7 +114,7 @@ public class MessageEditor : EditorWindow
             
             text.fontStyle = mFontStyle;
         }
-        if (newObject.TryGetComponent(out UnsettledChar unsettled)) 
+        if (newObject.TryGetComponent(out UnsetableObject unsettled)) 
         {
             unsettled.Setting(mWaitFrame, mVibration);
         }

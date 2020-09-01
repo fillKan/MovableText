@@ -15,7 +15,7 @@ public class MessageEditor : EditorWindow
     private string mName;
     private string mMessage;
     
-    private Transform mParent;
+    private Canvas  mCanvas;
     private Vector3 mPosition;
 
     private Font  mFont;
@@ -34,18 +34,18 @@ public class MessageEditor : EditorWindow
         GUILayout.Label("Object Name", EditorStyles.label);
         mName = GUILayout.TextField(mName);
 
-        GUILayout.Space(8f);
-
         GUILayout.Label("Message", EditorStyles.label);
-        mMessage = EditorGUI.TextField(new Rect(2.5f, 63.5f, EditorGUIUtility.currentViewWidth - 7f, 18f), mMessage);
+        mMessage = EditorGUI.TextField(new Rect(2.5f, 55f, EditorGUIUtility.currentViewWidth - 7f, 18f), mMessage);
 
         GUILayout.Space(21f);
 
         GUILayout.Label("Font", EditorStyles.label);
         mFont = (Font)EditorGUILayout.ObjectField(mFont, typeof(Font), true);
 
-        GUILayout.Label("Parent Object", EditorStyles.label);
-        mParent = (Transform)EditorGUILayout.ObjectField(mParent, typeof(Transform), true);
+        GUILayout.Label("Parent Canvas", EditorStyles.label);
+        mCanvas = (Canvas)EditorGUILayout.ObjectField(mCanvas, typeof(Canvas), true);
+
+        GUILayout.Space(16f);
 
         GUILayout.Label("Letter Spacing", EditorStyles.label);
         mLetterSpacing = EditorGUILayout.FloatField(mLetterSpacing);
@@ -74,7 +74,7 @@ public class MessageEditor : EditorWindow
 
         Undo.RegisterCreatedObjectUndo(newObject, mName);
 
-        newObject.transform.parent = mParent;
+        newObject.transform.parent = mCanvas.transform;
         newObject.transform.localPosition = mPosition;
 
         if (newObject.TryGetComponent(out UnsettledText text)) {

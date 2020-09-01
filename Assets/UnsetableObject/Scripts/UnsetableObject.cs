@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UnstableStyle
+{
+    Rotation, Vibrato, RotationAndVibrato
+}
+
 public class UnsetableObject : MonoBehaviour
 {
     [SerializeField] private  uint mWaitFrame;
+    [SerializeField] private float mRotate;
     [SerializeField] private float mVibrato;
+    [SerializeField] private UnstableStyle mSTYLE;
+
+    private Vector2 mOriginPosition;
 
     private IEnumerator mEUpdate;
 
@@ -16,6 +25,8 @@ public class UnsetableObject : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(mEUpdate = EUpdate());
+
+        mOriginPosition = transform.localPosition;
     }
     private void OnDisable()
     {
@@ -30,7 +41,24 @@ public class UnsetableObject : MonoBehaviour
         {
             for (uint i = 0; i < mWaitFrame; i++) { yield return null; }
 
-            transform.localRotation = Quaternion.Euler(Vector3.forward * mVibrato * Random.Range(-1f, 1f));
+            switch (mSTYLE)
+            {
+                case UnstableStyle.Rotation:
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotate * Random.Range(-1f, 1f));
+                    break;
+
+                case UnstableStyle.Vibrato:
+                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibrato;
+                    break;
+
+                case UnstableStyle.RotationAndVibrato:
+                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibrato;
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotate * Random.Range(-1f, 1f));
+                    break;
+                default:
+                    break;
+            }
+            
         }
     }
 }

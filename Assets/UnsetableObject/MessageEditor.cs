@@ -23,7 +23,7 @@ public class MessageEditor : EditorWindow
 
     private FontStyle mFontStyle = FontStyle.Normal;
 
-    [MenuItem("MessageEditor/Create Unsettled Text")]
+    [MenuItem("Tools/Create Unstable Text")]
     private static void Init()
     {
         MessageEditor window = EditorWindow.GetWindow(typeof(MessageEditor)) as MessageEditor;

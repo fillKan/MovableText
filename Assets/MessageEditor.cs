@@ -21,7 +21,7 @@ public class MessageEditor : EditorWindow
     private Font  mFont;
     private Color mColor = Color.white;
 
-    [MenuItem("MessageEditor/Create Unsettled")]
+    [MenuItem("MessageEditor/Create Unsettled Text")]
     private static void Init()
     {
         MessageEditor window = EditorWindow.GetWindow(typeof(MessageEditor)) as MessageEditor;

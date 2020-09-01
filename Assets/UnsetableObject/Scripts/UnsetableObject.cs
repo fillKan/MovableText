@@ -4,22 +4,22 @@ using UnityEngine;
 
 public enum UnstableStyle
 {
-    Rotation, Vibrato, RotationAndVibrato
+    Rotation, Vibration, RotationAndVibration
 }
 
 public class UnsetableObject : MonoBehaviour
 {
     [SerializeField] private  uint mWaitFrame;
-    [SerializeField] private float mRotate;
-    [SerializeField] private float mVibrato;
+    [SerializeField] private float mRotation;
+    [SerializeField] private float mVibration;
     [SerializeField] private UnstableStyle mSTYLE;
 
     private Vector2 mOriginPosition;
 
     private IEnumerator mEUpdate;
 
-    public void Setting(uint waitFrame, float vibrato, UnstableStyle style) {
-        mWaitFrame = waitFrame; mVibrato = vibrato; mSTYLE = style;
+    public void Setting(uint waitFrame, float vibration, float rotation, UnstableStyle style) {
+        mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
     }
 
     private void OnEnable()
@@ -44,16 +44,16 @@ public class UnsetableObject : MonoBehaviour
             switch (mSTYLE)
             {
                 case UnstableStyle.Rotation:
-                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotate * Random.Range(-1f, 1f));
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
                     break;
 
-                case UnstableStyle.Vibrato:
-                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibrato;
+                case UnstableStyle.Vibration:
+                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibration;
                     break;
 
-                case UnstableStyle.RotationAndVibrato:
-                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibrato;
-                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotate * Random.Range(-1f, 1f));
+                case UnstableStyle.RotationAndVibration:
+                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibration;
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
                     break;
                 default:
                     break;

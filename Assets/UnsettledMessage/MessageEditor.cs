@@ -21,6 +21,8 @@ public class MessageEditor : EditorWindow
     private Font  mFont;
     private Color mColor = Color.white;
 
+    private FontStyle mFontStyle = FontStyle.Normal;
+
     [MenuItem("MessageEditor/Create Unsettled Text")]
     private static void Init()
     {
@@ -51,7 +53,9 @@ public class MessageEditor : EditorWindow
         mLetterSpacing = EditorGUILayout.FloatField(mLetterSpacing);
 
         GUILayout.Label("Font Size", EditorStyles.label);
-        mFontSize = EditorGUILayout.IntField(mFontSize);        
+        mFontSize = EditorGUILayout.IntField(mFontSize);
+
+        mFontStyle = (FontStyle)EditorGUILayout.EnumPopup("Font Style", mFontStyle);
 
         GUILayout.Label("Vibration", EditorStyles.label);
         mVibration = EditorGUILayout.Slider(mVibration, 0f, 180f);
@@ -106,7 +110,9 @@ public class MessageEditor : EditorWindow
 
             text.fontSize = mFontSize; text.font = mFont;
 
-            text.color = mColor;
+            text.color = mColor; 
+            
+            text.fontStyle = mFontStyle;
         }
         if (newObject.TryGetComponent(out UnsettledChar unsettled)) 
         {

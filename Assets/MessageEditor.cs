@@ -5,12 +5,16 @@ using UnityEngine.UI;
 public class MessageEditor : EditorWindow
 {
     private const int ODD = 1;
+
     private float mVibration = 5f;
-    private uint mWaitFrame = 6;
     private float mLetterSpacing = 20f;
-    private int mFontSize = 26;
+    
+    private uint mWaitFrame =  6;
+    private  int mFontSize  = 26;
+
     private string mName;
     private string mMessage;
+    
     private Transform mParent;
     private Vector3 mPosition;
 
@@ -104,7 +108,8 @@ public class MessageEditor : EditorWindow
 
             text.color = mColor;
         }
-        if (newObject.TryGetComponent(out UnsettledChar unsettled)) {
+        if (newObject.TryGetComponent(out UnsettledChar unsettled)) 
+        {
             unsettled.Setting(mWaitFrame, mVibration);
         }
         return newObject;

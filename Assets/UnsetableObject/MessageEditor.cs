@@ -22,6 +22,7 @@ public class MessageEditor : EditorWindow
     private Color mColor = Color.white;
 
     private FontStyle mFontStyle = FontStyle.Normal;
+    private UnstableStyle mUnstable = UnstableStyle.Rotation;
 
     [MenuItem("Tools/Create Unstable Text")]
     private static void Init()
@@ -56,6 +57,7 @@ public class MessageEditor : EditorWindow
         mFontSize = EditorGUILayout.IntField(mFontSize);
 
         mFontStyle = (FontStyle)EditorGUILayout.EnumPopup("Font Style", mFontStyle);
+        mUnstable = (UnstableStyle)EditorGUILayout.EnumPopup("Unstable Style", mUnstable);
 
         GUILayout.Label("Vibration", EditorStyles.label);
         mVibration = EditorGUILayout.Slider(mVibration, 0f, 180f);
@@ -116,7 +118,7 @@ public class MessageEditor : EditorWindow
         }
         if (newObject.TryGetComponent(out UnsetableObject unsettled)) 
         {
-            unsettled.Setting(mWaitFrame, mVibration);
+            unsettled.Setting(mWaitFrame, mVibration, mUnstable);
         }
         return newObject;
     }

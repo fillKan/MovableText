@@ -18,8 +18,8 @@ public class UnsetableObject : MonoBehaviour
 
     private IEnumerator mEUpdate;
 
-    public void Setting(uint waitFrame, float vibrato) {
-        mWaitFrame = waitFrame; mVibrato = vibrato;
+    public void Setting(uint waitFrame, float vibrato, UnstableStyle style) {
+        mWaitFrame = waitFrame; mVibrato = vibrato; mSTYLE = style;
     }
 
     private void OnEnable()

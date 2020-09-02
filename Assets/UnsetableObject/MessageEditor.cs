@@ -61,7 +61,7 @@ public class MessageEditor : EditorWindow
         mUnstable = (UnstableStyle)EditorGUILayout.EnumPopup("Unstable Style", mUnstable);
 
         GUILayout.Label("Vibration", EditorStyles.label);
-        mVibration = EditorGUILayout.Slider(mVibration, 0.01f, 2f);
+        mVibration = EditorGUILayout.Slider(mVibration, 0.01f, 3f);
 
         GUILayout.Label("Rotation", EditorStyles.label);
         mRotation = EditorGUILayout.Slider(mRotation, 0f, 180f);

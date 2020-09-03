@@ -10,7 +10,49 @@ public class UnsetableText : MonoBehaviour
 
     private UnsetableObject[] mUnsetables;
 
+    #region Output One by One variables
+
+    public bool IsOutputOnebyOne;
+
+    private IEnumerator mEOutputOnebyOne;
+
+    private float mLetterSpace;
+    private float mInterval;
+    #endregion
+
     public void SetMessage(string message) => mMessage = message;
+
+    private void OnEnable()
+    {
+        if (IsOutputOnebyOne) {
+            StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (mEOutputOnebyOne != null) {
+            StopCoroutine(mEOutputOnebyOne);
+        }
+        mEOutputOnebyOne = null;
+
+    }
+
+    private IEnumerator EOutputOnebyOne()
+    {
+        uint iteration = 0;
+        
+        while (iteration < mMessage.Length)
+        {
+            for (float i = 0f; i < mInterval; i += Time.deltaTime * Time.timeScale) {
+                yield return null;
+            }
+            // Out of one character
+
+            iteration++;
+        }        
+        yield break;
+    }
 
     private void Start()
     {

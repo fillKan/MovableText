@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,10 +52,8 @@ public class UnsetableText : MonoBehaviour
             
             for (int i = 0; i < iteration; i++)
             {
-                Vector2 position = Vector2.right * mLetterSpace * iteration * 0.5f * ((iteration + 1 * 0.5f) == i ? -1f : 1f);
-
-                mUnsetables[iteration].transform.localPosition = new Vector2(mLetterSpace * iteration * 0.5f, 0);
-            }         
+                mUnsetables[i].transform.Translate(Vector2.left * mLetterSpace, Space.Self);
+            }
             iteration++;
         }        
         yield break;
@@ -62,12 +61,17 @@ public class UnsetableText : MonoBehaviour
 
     private void Start()
     {
-        mUnsetables = new UnsetableObject[transform.childCount];
-
-        for (int i = 0; i < transform.childCount; i++)
+        if (IsOutputOnebyOne)
         {
-            if (transform.GetChild(i).TryGetComponent(out UnsetableObject unsetable)) {
-                mUnsetables[i] = unsetable;
+            mUnsetables = new UnsetableObject[transform.childCount];
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).TryGetComponent(out UnsetableObject unsetable))
+                {
+                    mUnsetables[i] = unsetable;
+                }
+                transform.GetChild(i).localPosition = Vector2.zero;
             }
         }
     }

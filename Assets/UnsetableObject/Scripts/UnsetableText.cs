@@ -53,9 +53,9 @@ public class UnsetableText : MonoBehaviour
             {
                 if (i == iteration - 1)
                 {
-                    mUnsetables[i].transform.Translate(Vector2.right * i * mLetterSpace * 0.5f, Space.Self);
+                    mUnsetables[i].transform.Translate(Vector2.right * i * mLetterSpace * 0.5f, Space.World);
                 }
-                else mUnsetables[i].transform.Translate(Vector2.left * mLetterSpace*0.5f, Space.Self);
+                else mUnsetables[i].transform.Translate(Vector2.left * mLetterSpace * 0.5f, Space.World);
             }
         }        
         yield break;

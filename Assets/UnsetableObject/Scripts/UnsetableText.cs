@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,20 +40,23 @@ public class UnsetableText : MonoBehaviour
 
     private IEnumerator EOutputOnebyOne()
     {
-        uint iteration = 0;
+        int iteration = 0;
         
         while (iteration < mMessage.Length)
         {
             for (float i = 0f; i < mInterval; i += Time.deltaTime * Time.timeScale) {
                 yield return null;
             }
-            mUnsetables[iteration].gameObject.SetActive(true);
-            
+            mUnsetables[iteration++].gameObject.SetActive(true);
+
             for (int i = 0; i < iteration; i++)
             {
-                mUnsetables[i].transform.Translate(Vector2.left * mLetterSpace, Space.Self);
+                if (i == iteration - 1)
+                {
+                    mUnsetables[i].transform.Translate(Vector2.right * i * mLetterSpace * 0.5f, Space.Self);
+                }
+                else mUnsetables[i].transform.Translate(Vector2.left * mLetterSpace*0.5f, Space.Self);
             }
-            iteration++;
         }        
         yield break;
     }

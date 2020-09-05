@@ -14,19 +14,18 @@ public class UnsetableObject : MonoBehaviour
     [SerializeField] private float mVibration;
     [SerializeField] private UnstableStyle mSTYLE;
 
-    private Vector2 mOriginPosition;
+    public Vector2 PivotPoint;
 
     private IEnumerator mEUpdate;
 
     public void Setting(uint waitFrame, float vibration, float rotation, UnstableStyle style) {
         mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
     }
-
     private void OnEnable()
     {
         StartCoroutine(mEUpdate = EUpdate());
 
-        mOriginPosition = transform.localPosition;
+        PivotPoint = transform.position;
     }
     private void OnDisable()
     {
@@ -48,11 +47,11 @@ public class UnsetableObject : MonoBehaviour
                     break;
 
                 case UnstableStyle.Vibration:
-                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibration;
+                    transform.position = PivotPoint + Random.insideUnitCircle * mVibration;
                     break;
 
                 case UnstableStyle.RotationAndVibration:
-                    transform.localPosition = mOriginPosition + Random.insideUnitCircle * mVibration;
+                    transform.position = PivotPoint + Random.insideUnitCircle * mVibration;
                     transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
                     break;
                 default:

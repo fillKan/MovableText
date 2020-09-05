@@ -175,6 +175,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &113073731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +329,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &200577235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +425,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &234543536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +521,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &236413505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +617,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &243968167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +714,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &325818441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,6 +810,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &345263601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,6 +906,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &462648588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,6 +1156,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &535936260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,7 +1251,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &545906787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1338,6 +1348,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &590046513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,7 +1443,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &609239773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,6 +1540,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &610846036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1622,7 +1635,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &679507566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,7 +1731,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &729872567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1812,7 +1827,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &729912054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,6 +1924,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &753557485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2002,7 +2019,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &790141996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2097,7 +2115,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &834370265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2192,7 +2211,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &835233178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,7 +2307,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &836416222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2382,7 +2403,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &840267704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2478,6 +2500,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &863105301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2572,7 +2595,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &907919157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2667,7 +2691,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &947868412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2763,6 +2788,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &962038315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2858,6 +2884,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1008696252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2953,6 +2980,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1014306147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3048,6 +3076,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1025186298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3143,6 +3172,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1032625701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3238,6 +3268,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1084098536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3333,6 +3364,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1122952897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3428,6 +3460,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1143434045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3612,6 +3645,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1218173359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3706,7 +3740,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1227366415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3801,7 +3836,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1238266759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3896,7 +3932,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1256914948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3991,7 +4028,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1262033739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4086,7 +4124,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1274119434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4182,6 +4221,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1319230022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4276,7 +4316,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1331601514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4372,6 +4413,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1428657941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4466,7 +4508,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1437901854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4562,6 +4605,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1465446063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4757,7 +4801,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1491778497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4852,7 +4897,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1497489919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4947,7 +4993,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1525883825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5043,6 +5090,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1542466018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5137,7 +5185,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1561761832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5232,7 +5281,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1566980694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5328,6 +5378,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1568163565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5422,7 +5473,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1662636845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5518,6 +5570,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1700335270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5612,7 +5665,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1758339726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5707,7 +5761,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1789164275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5869,6 +5924,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1822484900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5963,7 +6019,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1857209657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6058,7 +6115,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1872189172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6154,6 +6212,7 @@ MonoBehaviour:
   mRotation: 0
   mVibration: 0
   mSTYLE: 0
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1902864565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6248,7 +6307,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &1965050003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6343,7 +6403,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &2064525562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6438,7 +6499,8 @@ MonoBehaviour:
   mWaitFrame: 5
   mRotation: 8
   mVibration: 1
-  mSTYLE: 0
+  mSTYLE: 1
+  PivotPoint: {x: 0, y: 0}
 --- !u!114 &2097721694
 MonoBehaviour:
   m_ObjectHideFlags: 0

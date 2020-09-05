@@ -16,8 +16,8 @@ public class UnsetableText : MonoBehaviour
 
     private IEnumerator mEOutputOnebyOne;
 
-    private float mLetterSpace;
-    private float mInterval;
+    [SerializeField] private float mLetterSpace;
+    [SerializeField] private float mInterval;
     #endregion
 
     public void SetMessage(string message) => mMessage = message;

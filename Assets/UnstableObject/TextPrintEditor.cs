@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine.UI;
 
-public class OutputEditor : EditorWindow
+public class TextPrintEditor : EditorWindow
 {
     private UnstableText mUnstable;
 
@@ -11,12 +11,12 @@ public class OutputEditor : EditorWindow
     private float mLetterSpace;
     private float mInterval;
 
-    private bool mIsOutputOnebyOne;
+    private bool mIsPrinOnebyOne;
 
-    [MenuItem("Tools/Unstable Text/Output Edit")]
+    [MenuItem("Tools/Unstable Text/Text Print Edit")]
     private static void Init()
     {
-        OutputEditor window = EditorWindow.GetWindow(typeof(OutputEditor)) as OutputEditor;
+        TextPrintEditor window = EditorWindow.GetWindow(typeof(TextPrintEditor)) as TextPrintEditor;
 
         window.Show();
     }
@@ -36,7 +36,7 @@ public class OutputEditor : EditorWindow
                 mLetterSpace = mUnstable.LetterSpace;
                 mInterval    = mUnstable.Interval;
 
-                mIsOutputOnebyOne = mUnstable.IsOutputOnebyOne;
+                mIsPrinOnebyOne = mUnstable.IsPrintOnebyOne;
             }
             else
             {
@@ -55,7 +55,7 @@ public class OutputEditor : EditorWindow
         GUILayout.Label("Interval", EditorStyles.label);
         mInterval = EditorGUILayout.FloatField(mInterval);
 
-        mIsOutputOnebyOne = EditorGUILayout.Toggle("Print Out-OnebyOne",mIsOutputOnebyOne);
+        mIsPrinOnebyOne = EditorGUILayout.Toggle("Print-OnebyOne",mIsPrinOnebyOne);
         
         GUILayout.Space(2f);
 
@@ -65,7 +65,7 @@ public class OutputEditor : EditorWindow
 
             mUnstable.Setting(mMessage, mLetterSpace, mInterval);
 
-            mUnstable.IsOutputOnebyOne = mIsOutputOnebyOne;
+            mUnstable.IsPrintOnebyOne = mIsPrinOnebyOne;
         }
     }
 }

@@ -63,10 +63,7 @@ public class OutputEditor : EditorWindow
         {
             Undo.RecordObject(mUnsetable, "Apply");
 
-            mUnsetable.Message = mMessage;
-
-            mUnsetable.LetterSpace = mLetterSpace;
-            mUnsetable.Interval    = mInterval;
+            mUnsetable.Setting(mMessage, mLetterSpace, mInterval);
 
             mUnsetable.IsOutputOnebyOne = mIsOutputOnebyOne;
         }

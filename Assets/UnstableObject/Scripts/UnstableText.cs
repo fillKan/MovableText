@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnsetableText : MonoBehaviour
+public class UnstableText : MonoBehaviour
 {
     [SerializeField][TextArea]
     private string mMessage;
     public  string  Message
     { get => mMessage; }
 
-    private UnsetableObject[] mUnsetables;
+    private UnstableObject[] mUnstables;
 
     #region Output One by One variables
 
@@ -59,21 +59,21 @@ public class UnsetableText : MonoBehaviour
             for (float i = 0f; i < mInterval; i += Time.deltaTime * Time.timeScale) {
                 yield return null;
             }
-            mUnsetables[iteration++].gameObject.SetActive(true);
+            mUnstables[iteration++].gameObject.SetActive(true);
 
             for (int i = 0; i < iteration; i++)
             {
                 if (i == iteration - 1)
                 {
-                    mUnsetables[i].PivotPoint += Vector2.right * i * mLetterSpace * 0.5f;
+                    mUnstables[i].PivotPoint += Vector2.right * i * mLetterSpace * 0.5f;
 
-                    mUnsetables[i].transform.Translate(Vector2.right * i * mLetterSpace * 0.5f, Space.World);
+                    mUnstables[i].transform.Translate(Vector2.right * i * mLetterSpace * 0.5f, Space.World);
                 }
                 else
                 {
-                    mUnsetables[i].PivotPoint += Vector2.left * mLetterSpace * 0.5f;
+                    mUnstables[i].PivotPoint += Vector2.left * mLetterSpace * 0.5f;
 
-                    mUnsetables[i].transform.Translate(Vector2.left * mLetterSpace * 0.5f, Space.World);
+                    mUnstables[i].transform.Translate(Vector2.left * mLetterSpace * 0.5f, Space.World);
                 }
             }
         }        
@@ -84,13 +84,13 @@ public class UnsetableText : MonoBehaviour
     {
         if (IsOutputOnebyOne)
         {
-            mUnsetables = new UnsetableObject[transform.childCount];
+            mUnstables = new UnstableObject[transform.childCount];
 
             for (int i = 0; i < transform.childCount; i++)
             {
-                if (transform.GetChild(i).TryGetComponent(out UnsetableObject unsetable))
+                if (transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
                 {
-                    mUnsetables[i] = unsetable;
+                    mUnstables[i] = unstable;
                 }
                 transform.GetChild(i).localPosition = Vector2.zero;
             }

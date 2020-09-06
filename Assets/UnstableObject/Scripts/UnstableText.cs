@@ -37,6 +37,12 @@ public class UnstableText : MonoBehaviour
     private void OnEnable()
     {
         if (IsPrintOnebyOne) {
+            for (int i = 0; i < mUnstables.Length; i++)
+            {
+                mUnstables[i].gameObject.SetActive(false);
+
+                mUnstables[i].transform.localPosition = Vector2.zero;
+            }
             StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());
         }
     }
@@ -80,7 +86,7 @@ public class UnstableText : MonoBehaviour
         yield break;
     }
 
-    private void Start()
+    private void Awake()
     {
         if (IsPrintOnebyOne)
         {
@@ -92,7 +98,6 @@ public class UnstableText : MonoBehaviour
                 {
                     mUnstables[i] = unstable;
                 }
-                transform.GetChild(i).localPosition = Vector2.zero;
             }
         }
     }

@@ -7,7 +7,7 @@ public enum UnstableStyle
     Rotation, Vibration, RotationAndVibration
 }
 
-public class UnsetableObject : MonoBehaviour
+public class UnstableObject : MonoBehaviour
 {
     [SerializeField] private  uint mWaitFrame;
     [SerializeField] private float mRotation;

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class OutputEditor : EditorWindow
 {
-    private UnsetableText mUnsetable;
+    private UnstableText mUnstable;
 
     private string mMessage;
 
@@ -24,19 +24,19 @@ public class OutputEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Space(8f);
-        mUnsetable = (UnsetableText)EditorGUILayout.ObjectField("Edit Target", mUnsetable, typeof(UnsetableText), true);
+        mUnstable = (UnstableText)EditorGUILayout.ObjectField("Edit Target", mUnstable, typeof(UnstableText), true);
         GUILayout.Space(2f);
 
         if (GUILayout.Button("Extraction"))
         {
-            if (mUnsetable != null)
+            if (mUnstable != null)
             {
-                mMessage = mUnsetable.Message;
+                mMessage = mUnstable.Message;
 
-                mLetterSpace = mUnsetable.LetterSpace;
-                mInterval    = mUnsetable.Interval;
+                mLetterSpace = mUnstable.LetterSpace;
+                mInterval    = mUnstable.Interval;
 
-                mIsOutputOnebyOne = mUnsetable.IsOutputOnebyOne;
+                mIsOutputOnebyOne = mUnstable.IsOutputOnebyOne;
             }
             else
             {
@@ -59,13 +59,13 @@ public class OutputEditor : EditorWindow
         
         GUILayout.Space(2f);
 
-        if (GUILayout.Button("Apply") && mUnsetable != null)
+        if (GUILayout.Button("Apply") && mUnstable != null)
         {
-            Undo.RecordObject(mUnsetable, "Apply");
+            Undo.RecordObject(mUnstable, "Apply");
 
-            mUnsetable.Setting(mMessage, mLetterSpace, mInterval);
+            mUnstable.Setting(mMessage, mLetterSpace, mInterval);
 
-            mUnsetable.IsOutputOnebyOne = mIsOutputOnebyOne;
+            mUnstable.IsOutputOnebyOne = mIsOutputOnebyOne;
         }
     }
 }

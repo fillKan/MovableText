@@ -25,7 +25,7 @@ public class UnstableObject : MonoBehaviour
     {
         StartCoroutine(mEUpdate = EUpdate());
 
-        PivotPoint = transform.position;
+        PivotPoint = transform.localPosition;
     }
     private void OnDisable()
     {
@@ -47,11 +47,11 @@ public class UnstableObject : MonoBehaviour
                     break;
 
                 case UnstableStyle.Vibration:
-                    transform.position = PivotPoint + Random.insideUnitCircle * mVibration;
+                    transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
                     break;
 
                 case UnstableStyle.RotationAndVibration:
-                    transform.position = PivotPoint + Random.insideUnitCircle * mVibration;
+                    transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
                     transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
                     break;
                 default:

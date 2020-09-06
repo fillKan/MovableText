@@ -72,14 +72,12 @@ public class UnstableText : MonoBehaviour
                 if (i == iteration - 1)
                 {
                     mUnstables[i].PivotPoint += Vector2.right * i * mLetterSpace * 0.5f;
-
-                    mUnstables[i].transform.Translate(Vector2.right * i * mLetterSpace * 0.5f, Space.World);
+                    mUnstables[i].transform.localPosition += Vector3.right * i * mLetterSpace * 0.5f;
                 }
                 else
                 {
                     mUnstables[i].PivotPoint += Vector2.left * mLetterSpace * 0.5f;
-
-                    mUnstables[i].transform.Translate(Vector2.left * mLetterSpace * 0.5f, Space.World);
+                    mUnstables[i].transform.localPosition += Vector3.left * mLetterSpace * 0.5f;
                 }
             }
         }        

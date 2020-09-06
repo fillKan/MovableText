@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 public class UnstableText : MonoBehaviour
@@ -90,6 +91,36 @@ public class UnstableText : MonoBehaviour
                 if (transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
                 {
                     mUnstables[i] = unstable;
+                }
+            }
+        }
+    }
+}
+
+[CustomEditor(typeof(UnstableText))]
+public class MessageEditButton : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        GUILayout.Space(8f);
+
+        if (GUILayout.Button("Apply to changed message", GUILayout.Height(25f)))
+        {
+            UnstableText unstableText = target as UnstableText;
+
+            for (int i = 0; i < unstableText.Message.Length; i++)
+            {
+                if (i >= unstableText.transform.childCount)
+                {
+                    break;
+                }
+                else if (unstableText.transform.GetChild(i).TryGetComponent(out Text text)) 
+                {
+                    Undo.RecordObject(text, "Apply to changed text");
+
+                    text.text = unstableText.Message[i].ToString();
                 }
             }
         }

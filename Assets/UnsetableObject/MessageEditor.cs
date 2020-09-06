@@ -25,7 +25,7 @@ public class MessageEditor : EditorWindow
     private FontStyle mFontStyle = FontStyle.Normal;
     private UnstableStyle mUnstable = UnstableStyle.Rotation;
 
-    [MenuItem("Tools/Create Unstable Text")]
+    [MenuItem("Tools/Unstable Text/Create")]
     private static void Init()
     {
         MessageEditor window = EditorWindow.GetWindow(typeof(MessageEditor)) as MessageEditor;

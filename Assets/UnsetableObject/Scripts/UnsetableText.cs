@@ -7,6 +7,11 @@ public class UnsetableText : MonoBehaviour
 {
     [SerializeField][TextArea]
     private string mMessage;
+    public  string  Message
+    {
+        get => mMessage;
+        set => mMessage = value;
+    }
 
     private UnsetableObject[] mUnsetables;
 
@@ -15,6 +20,17 @@ public class UnsetableText : MonoBehaviour
     public bool IsOutputOnebyOne;
 
     private IEnumerator mEOutputOnebyOne;
+
+    public float LetterSpace
+    {
+        get => mLetterSpace;
+        set => mLetterSpace = value;
+    }
+    public float Interval
+    {
+        get => mInterval;
+        set => mInterval = value;
+    }
 
     [SerializeField] private float mLetterSpace;
     [SerializeField] private float mInterval;

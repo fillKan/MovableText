@@ -12,9 +12,9 @@ public class UnstableText : MonoBehaviour
 
     private UnstableObject[] mUnstables;
 
-    #region Output One by One variables
+    #region Print OnebyOne variables
 
-    public bool IsOutputOnebyOne;
+    public bool IsPrintOnebyOne;
 
     private IEnumerator mEOutputOnebyOne;
 
@@ -36,7 +36,7 @@ public class UnstableText : MonoBehaviour
 
     private void OnEnable()
     {
-        if (IsOutputOnebyOne) {
+        if (IsPrintOnebyOne) {
             StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());
         }
     }
@@ -82,7 +82,7 @@ public class UnstableText : MonoBehaviour
 
     private void Start()
     {
-        if (IsOutputOnebyOne)
+        if (IsPrintOnebyOne)
         {
             mUnstables = new UnstableObject[transform.childCount];
 

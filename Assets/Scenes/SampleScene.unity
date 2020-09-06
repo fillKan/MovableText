@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMessage: "\"\uC720\uC2A4\uD2F0\uD2F0\uC544\""
-  IsOutputOnebyOne: 0
+  IsPrintOnebyOne: 0
   mLetterSpace: 0
   mInterval: 0
 --- !u!1 &200577232
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMessage: "\uB4DC\uB514\uC5B4.. \uB0B4 \uC138\uACC4\uAC00 \uAE68\uC9C0\uB294 \uAC70\uC57C?"
-  IsOutputOnebyOne: 0
+  IsPrintOnebyOne: 0
   mLetterSpace: 0
   mInterval: 0
 --- !u!1 &519420028
@@ -3588,7 +3588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mMessage: "\uB2E4\uC74C\uC8FC\uBD80\uD130 2\uD559\uAE30 \uC2DC\uC791\uC785\uB2C8\uB2E4.
     2\uD559\uAE30 \uC2DC\uAC04\uD45C \uD655\uC778\uD558\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4."
-  IsOutputOnebyOne: 1
+  IsPrintOnebyOne: 1
   mLetterSpace: 20
   mInterval: 0.18
 --- !u!1 &1218173356

@@ -69,16 +69,11 @@ public class UnstableText : MonoBehaviour
 
             for (int i = 0; i < iteration; i++)
             {
-                if (i == iteration - 1)
-                {
-                    mUnstables[i].PivotPoint += Vector2.right * i * mLetterSpace * 0.5f;
-                    mUnstables[i].transform.localPosition += Vector3.right * i * mLetterSpace * 0.5f;
-                }
-                else
-                {
-                    mUnstables[i].PivotPoint += Vector2.left * mLetterSpace * 0.5f;
-                    mUnstables[i].transform.localPosition += Vector3.left * mLetterSpace * 0.5f;
-                }
+                Vector2 translate = ((i == iteration - 1) ? Vector2.right * i : Vector2.left) * mLetterSpace * 0.5f;
+
+                mUnstables[i].PivotPoint += translate;
+
+                mUnstables[i].transform.localPosition += (Vector3)translate;
             }
         }        
         yield break;

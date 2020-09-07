@@ -94,15 +94,15 @@ public class MessageEditor : EditorWindow
 
         for (int i = 0; i < mMessage.Length; i++)
         {
-            GameObject createChar = CreateUnStableChar(mMessage[i]);
+            GameObject createChar = CreateUnStableChar(i, mMessage[i]);
 
             createChar.transform.parent = newObject.transform;
             createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * mLetterSpacing + charOffset, 0);
         }
     }
-    private GameObject CreateUnStableChar(char letter)
+    private GameObject CreateUnStableChar(int index, char letter)
     {
-        string name = $"Character[{letter}]";
+        string name = $"Character[{index}]";
 
         GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(UnstableObject));
 

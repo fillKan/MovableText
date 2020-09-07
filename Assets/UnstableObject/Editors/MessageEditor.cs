@@ -88,7 +88,7 @@ public class MessageEditor : EditorWindow
         newObject.transform.localPosition = mPosition;
 
         if (newObject.TryGetComponent(out UnstableText text)) {
-            text.Setting(mMessage);
+            text.Setting(mMessage, mLetterSpacing, 0f);
         }
         float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : mLetterSpacing * 0.5f;
 

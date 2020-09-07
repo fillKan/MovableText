@@ -4,6 +4,28 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
+public struct UnstableCharInfo
+{
+    public Color color;
+
+    public FontStyle fontStyle;
+    
+    public Font font;
+    
+    public UnstableObject unstableObject;
+    
+    public float fontSize;
+
+    public UnstableCharInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, float fontSize)
+    {
+        this.color     = color;
+        this.fontStyle = fontStyle;
+        this.font      = font;
+        this.unstableObject = unstableObject;
+        this.fontSize  = fontSize;
+    }
+}
+
 public class UnstableText : MonoBehaviour
 {
     [SerializeField][TextArea]
@@ -28,7 +50,11 @@ public class UnstableText : MonoBehaviour
     [SerializeField] private float mInterval;
     #endregion
 
+    public  UnstableCharInfo GetTextInfo => mTextInfo;
+    private UnstableCharInfo   mTextInfo;
     public void Setting(string message) => mMessage = message;
+
+    public void Setting(UnstableCharInfo info) => mTextInfo = info;
 
     public void Setting(string message, float letterSpace, float interval)
     {

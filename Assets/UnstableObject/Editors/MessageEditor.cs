@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class MessageEditor : EditorWindow
 {
-    private const int ODD = 1;
-
     private float mVibration = 1f;
     private float mRotation  = 5f;
     private float mLetterSpacing = 20f;
@@ -88,14 +86,12 @@ public class MessageEditor : EditorWindow
         unstableText.Setting(mMessage, mLetterSpacing, 0f);
         unstableText.Setting(unstCInfo);
 
-        float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : mLetterSpacing * 0.5f;
-
         for (int i = 0; i < mMessage.Length; i++)
         {
             UnstableObject createChar = Unst.RegisterCharObject(i, mMessage[i], unstCInfo);
 
             createChar.transform.parent = unstableText.transform;
-            createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * mLetterSpacing + charOffset, 0);
+            createChar.transform.SetLetterSpace(mMessage.Length, mLetterSpacing, i);
         }
     }
 }

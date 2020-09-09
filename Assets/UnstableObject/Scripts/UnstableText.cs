@@ -147,9 +147,15 @@ public class MessageEditButton : Editor
 
             int messageLength = unstableText.Message.Length;
 
-            int iteration = Mathf.Max(messageLength, unstableText.transform.childCount);
+            Transform childTransform;
 
-            for (int i = 0; i < iteration; i++)
+            while (messageLength < unstableText.transform.childCount)
+            {
+                childTransform = unstableText.transform.GetChild(unstableText.transform.childCount - 1);
+
+                Undo.DestroyObjectImmediate(childTransform.gameObject);
+            }
+            for (int i = 0; i < messageLength; i++)
             {
                 if (i >= unstableText.transform.childCount)
                 {

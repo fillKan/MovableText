@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
+[System.Serializable]
 public struct UnstCInfo
 {
     public uint waitFrame;
@@ -34,7 +35,6 @@ public struct UnstCInfo
         unstableStyle = unstableObject.STYLE;
     }
 }
-
 public class UnstableText : MonoBehaviour
 {
     [SerializeField][TextArea]
@@ -60,6 +60,7 @@ public class UnstableText : MonoBehaviour
     #endregion
 
     public  UnstCInfo GetTextInfo => mTextInfo;
+    [SerializeField]
     private UnstCInfo mTextInfo;
     public void Setting(string message) => mMessage = message;
 

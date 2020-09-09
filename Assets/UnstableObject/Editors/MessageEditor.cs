@@ -82,43 +82,20 @@ public class MessageEditor : EditorWindow
     {
         UnstableText unstableText = Unst.RegisterTextObject(mName, mCanvas, mPosition);
 
+        UnstCInfo unstCInfo 
+            = new UnstCInfo(mColor, mFontStyle, mFont, new UnstableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
+
         unstableText.Setting(mMessage, mLetterSpacing, 0f);
-        unstableText.Setting(new UnstCInfo(mColor, mFontStyle, mFont, new UnstableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize));
+        unstableText.Setting(unstCInfo);
 
         float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : mLetterSpacing * 0.5f;
 
         for (int i = 0; i < mMessage.Length; i++)
         {
-            GameObject createChar = CreateUnStableChar(i, mMessage[i]);
+            UnstableObject createChar = Unst.RegisterCharObject(i, mMessage[i], unstCInfo);
 
             createChar.transform.parent = unstableText.transform;
             createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * mLetterSpacing + charOffset, 0);
         }
-    }
-    private GameObject CreateUnStableChar(int index, char letter)
-    {
-        string name = $"Character[{index}]";
-
-        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(UnstableObject));
-
-        Undo.RegisterCreatedObjectUndo(newObject, name);
-
-        if (newObject.TryGetComponent(out Text text)) 
-        {
-            text.text = letter.ToString();
-
-            text.alignment = TextAnchor.MiddleCenter;
-
-            text.fontSize = mFontSize; text.font = mFont;
-
-            text.color = mColor; 
-            
-            text.fontStyle = mFontStyle;
-        }
-        if (newObject.TryGetComponent(out UnstableObject unstable)) 
-        {
-            unstable.Setting(mWaitFrame, mVibration, mRotation, mUnstable);
-        }
-        return newObject;
     }
 }

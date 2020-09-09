@@ -9,6 +9,11 @@ public enum UnstableStyle
 
 public class UnstableObject : MonoBehaviour
 {
+    public  uint WaitFrame => mWaitFrame;
+    public float Rotation  => mRotation;
+    public float Vibration => mVibration;
+    public UnstableStyle STYLE => mSTYLE;
+
     [SerializeField] private  uint mWaitFrame;
     [SerializeField] private float mRotation;
     [SerializeField] private float mVibration;
@@ -17,6 +22,10 @@ public class UnstableObject : MonoBehaviour
     public Vector2 PivotPoint;
 
     private IEnumerator mEUpdate;
+
+    public UnstableObject(uint waitFrame, float rotation, float vibration, UnstableStyle style) {
+        mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
+    }
 
     public void Setting(uint waitFrame, float vibration, float rotation, UnstableStyle style) {
         mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;

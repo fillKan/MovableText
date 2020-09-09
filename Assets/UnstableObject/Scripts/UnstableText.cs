@@ -16,11 +16,11 @@ public struct UnstCInfo
 
     public Font font;
 
-    public float fontSize;
+    public int   fontSize;
     public float rotation;
     public float vibration;
 
-    public UnstCInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, float fontSize)
+    public UnstCInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, int fontSize)
     {
         this.color     = color;
         this.fontStyle = fontStyle;

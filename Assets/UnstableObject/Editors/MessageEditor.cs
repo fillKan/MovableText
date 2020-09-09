@@ -83,7 +83,6 @@ public class MessageEditor : EditorWindow
         UnstableText unstableText = Unst.RegisterTextObject(mName, mCanvas, mPosition);
 
         unstableText.Setting(mMessage, mLetterSpacing, 0f);
-
         unstableText.Setting(new UnstCInfo(mColor, mFontStyle, mFont, new UnstableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize));
 
         float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : mLetterSpacing * 0.5f;

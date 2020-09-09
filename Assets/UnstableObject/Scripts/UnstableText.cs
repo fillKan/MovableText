@@ -6,23 +6,32 @@ using UnityEngine.UI;
 
 public struct UnstCInfo
 {
+    public uint waitFrame;
+
     public Color color;
 
     public FontStyle fontStyle;
-    
+
+    public UnstableStyle unstableStyle;
+
     public Font font;
-    
-    public UnstableObject unstableObject;
-    
+
     public float fontSize;
+    public float rotation;
+    public float vibration;
 
     public UnstCInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, float fontSize)
     {
         this.color     = color;
         this.fontStyle = fontStyle;
         this.font      = font;
-        this.unstableObject = unstableObject;
         this.fontSize  = fontSize;
+
+        rotation  = unstableObject.Rotation;
+        vibration = unstableObject.Vibration;
+        waitFrame = unstableObject.WaitFrame;
+
+        unstableStyle = unstableObject.STYLE;
     }
 }
 

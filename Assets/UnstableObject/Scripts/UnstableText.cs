@@ -145,13 +145,22 @@ public class MessageEditButton : Editor
         {
             UnstableText unstableText = target as UnstableText;
 
-            for (int i = 0; i < unstableText.Message.Length; i++)
+            int messageLength = unstableText.Message.Length;
+
+            int iteration = Mathf.Max(messageLength, unstableText.transform.childCount);
+
+            for (int i = 0; i < iteration; i++)
             {
                 if (i >= unstableText.transform.childCount)
                 {
-                    break;
+                    Unst.RegisterCharObject(i, unstableText.Message[i], unstableText.GetTextInfo)
+                        .transform.parent = unstableText.transform;
                 }
-                else if (unstableText.transform.GetChild(i).TryGetComponent(out Text text)) 
+                Undo.RecordObject(unstableText.transform.GetChild(i), unstableText.Message);
+
+                unstableText.transform.GetChild(i).SetLetterSpace(messageLength, unstableText.LetterSpace, i);
+
+                if (unstableText.transform.GetChild(i).TryGetComponent(out Text text)) 
                 {
                     Undo.RecordObject(text, "Apply to changed text");
 

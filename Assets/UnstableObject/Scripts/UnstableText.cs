@@ -142,14 +142,13 @@ public class MessageEditButton : Editor
 
         GUILayout.Space(8f);
 
-        if (GUILayout.Button("Apply to changed message", GUILayout.Height(25f)))
+        if (!EditorApplication.isPlaying && 
+             GUILayout.Button("Apply to changed message", GUILayout.Height(25f)))
         {
             UnstableText unstableText = target as UnstableText;
 
-            int messageLength = unstableText.Message.Length;
-
-            Transform  unstTransform = unstableText.transform;
-            Transform childTransform;
+            int       messageLength = unstableText.Message.Length;
+            Transform unstTransform = unstableText.transform;
 
             #region Summary
             /*=================================================================================
@@ -157,13 +156,10 @@ public class MessageEditButton : Editor
              * 만약 불안정문자의 수가 메시지의 길이보다 많다면, 제일 뒤에있는 불안정문자를 제거한다. 
              *=================================================================================*/
             #endregion
-            while (messageLength < unstTransform.childCount)
-            {
-                childTransform = unstTransform.GetChild(unstTransform.childCount - 1);
+            while (messageLength < unstTransform.childCount) {
 
-                Undo.DestroyObjectImmediate(childTransform.gameObject);
+               Undo.DestroyObjectImmediate(unstTransform.GetChild(unstTransform.childCount - 1).gameObject);
             }
-
             #region Summary
             /*=================================================================================
             * Rearrange unstableChar based on length of changed message and change the each unstableChar by changed message.

@@ -148,26 +148,40 @@ public class MessageEditButton : Editor
 
             int messageLength = unstableText.Message.Length;
 
+            Transform  unstTransform = unstableText.transform;
             Transform childTransform;
 
-            while (messageLength < unstableText.transform.childCount)
+            #region Summary
+            /*=================================================================================
+             * If amount of unstableChar is more than messageLength, removal unstableChar at the last.
+             * 만약 불안정문자의 수가 메시지의 길이보다 많다면, 제일 뒤에있는 불안정문자를 제거한다. 
+             *=================================================================================*/
+            #endregion
+            while (messageLength < unstTransform.childCount)
             {
-                childTransform = unstableText.transform.GetChild(unstableText.transform.childCount - 1);
+                childTransform = unstTransform.GetChild(unstTransform.childCount - 1);
 
                 Undo.DestroyObjectImmediate(childTransform.gameObject);
             }
+
+            #region Summary
+            /*=================================================================================
+            * Rearrange unstableChar based on length of changed message and change the each unstableChar by changed message.
+            * 변경된 메시지에따라 불안정문자를 재배치하고, 각 불안정문자들이 나타내는 글자를 변경한다.
+            *=================================================================================*/
+            #endregion
             for (int i = 0; i < messageLength; i++)
             {
-                if (i >= unstableText.transform.childCount)
+                if (i >= unstTransform.childCount)
                 {
                     Unst.RegisterCharObject(i, unstableText.Message[i], unstableText.GetTextInfo)
-                        .transform.parent = unstableText.transform;
+                        .transform.parent = unstTransform;
                 }
-                Undo.RecordObject(unstableText.transform.GetChild(i), unstableText.Message);
+                Undo.RecordObject(unstTransform.GetChild(i), unstableText.Message);
 
-                unstableText.transform.GetChild(i).SetLetterSpace(messageLength, unstableText.LetterSpace, i);
+                unstTransform.GetChild(i).SetLetterSpace(messageLength, unstableText.LetterSpace, i);
 
-                if (unstableText.transform.GetChild(i).TryGetComponent(out Text text)) 
+                if (unstTransform.GetChild(i).TryGetComponent(out Text text)) 
                 {
                     Undo.RecordObject(text, "Apply to changed text");
 

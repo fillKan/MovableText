@@ -74,6 +74,9 @@ public class UnstableText : MonoBehaviour
     private void OnEnable()
     {
         if (IsPrintOnebyOne) {
+
+            CheckUnstArray();
+
             for (int i = 0; i < mUnstables.Length; i++)
             {
                 mUnstables[i].gameObject.SetActive(false);
@@ -115,10 +118,9 @@ public class UnstableText : MonoBehaviour
         }        
         yield break;
     }
-
-    private void Awake()
+    private void CheckUnstArray()
     {
-        if (IsPrintOnebyOne)
+        if (mUnstables == null)
         {
             mUnstables = new UnstableObject[transform.childCount];
 

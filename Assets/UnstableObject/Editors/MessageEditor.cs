@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class MessageEditor : EditorWindow
 {
-    private const int ODD = 1;
-
     private float mVibration = 1f;
     private float mRotation  = 5f;
     private float mLetterSpacing = 20f;
@@ -80,50 +78,20 @@ public class MessageEditor : EditorWindow
     }
     private void Create()
     {
-        GameObject newObject = new GameObject(mName, typeof(RectTransform), typeof(UnstableText));
+        UnstableText unstableText = Unst.RegisterTextObject(mName, mCanvas, mPosition);
 
-        Undo.RegisterCreatedObjectUndo(newObject, mName);
+        UnstCInfo unstCInfo 
+            = new UnstCInfo(mColor, mFontStyle, mFont, new UnstableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
 
-        newObject.transform.parent = mCanvas.transform;
-        newObject.transform.localPosition = mPosition;
-
-        if (newObject.TryGetComponent(out UnstableText text)) {
-            text.Setting(mMessage);
-        }
-        float charOffset = (mMessage.Length & ODD).Equals(ODD) ? 0f : mLetterSpacing * 0.5f;
+        unstableText.Setting(mMessage, mLetterSpacing, 0f);
+        unstableText.Setting(unstCInfo);
 
         for (int i = 0; i < mMessage.Length; i++)
         {
-            GameObject createChar = CreateUnStableChar(mMessage[i]);
+            UnstableObject createChar = Unst.RegisterCharObject(i, mMessage[i], unstCInfo);
 
-            createChar.transform.parent = newObject.transform;
-            createChar.transform.localPosition = new Vector2((-mMessage.Length / 2 + i) * mLetterSpacing + charOffset, 0);
+            createChar.transform.parent = unstableText.transform;
+            createChar.transform.SetLetterSpace(mMessage.Length, mLetterSpacing, i);
         }
-    }
-    private GameObject CreateUnStableChar(char letter)
-    {
-        string name = $"Character[{letter}]";
-
-        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(UnstableObject));
-
-        Undo.RegisterCreatedObjectUndo(newObject, name);
-
-        if (newObject.TryGetComponent(out Text text)) 
-        {
-            text.text = letter.ToString();
-
-            text.alignment = TextAnchor.MiddleCenter;
-
-            text.fontSize = mFontSize; text.font = mFont;
-
-            text.color = mColor; 
-            
-            text.fontStyle = mFontStyle;
-        }
-        if (newObject.TryGetComponent(out UnstableObject unstable)) 
-        {
-            unstable.Setting(mWaitFrame, mVibration, mRotation, mUnstable);
-        }
-        return newObject;
     }
 }

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
-
+public enum FadeType 
+{
+    None, In, Out 
+}
 [System.Serializable]
 public struct UnstCInfo
 {
@@ -35,6 +38,18 @@ public struct UnstCInfo
         unstableStyle = unstableObject.STYLE;
     }
 }
+
+[System.Serializable]
+public struct FadeCInfo
+{
+    public FadeType FadeType;
+
+    public float FadeTime;
+
+    public bool IsUsingTimeScale;
+    public bool IsFadedDisable;
+}
+
 public class UnstableText : MonoBehaviour
 {
     [SerializeField][TextArea]

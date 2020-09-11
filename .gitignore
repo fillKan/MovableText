@@ -11,8 +11,7 @@
 /[Mm]emoryCaptures/
 
 # FontAsset
-*.ttf
-*.ttf.meta
+/[Aa]ssets/[Ff]onts
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta

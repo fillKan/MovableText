@@ -82,6 +82,8 @@ public class UnstableText : MonoBehaviour
     [SerializeField]
     private FadeCInfo mFadeInfo;
 
+    private IEnumerator mEFading;
+
     public void Setting(string message) => mMessage = message;
 
     public void Setting(UnstCInfo info) => mTextInfo = info;
@@ -105,8 +107,7 @@ public class UnstableText : MonoBehaviour
             }
             StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());           
         }
-        StartCoroutine(EFadeOut());
-        StartCoroutine(EFadeIn());
+        CastFading();
     }
 
     private void OnDisable()
@@ -117,62 +118,48 @@ public class UnstableText : MonoBehaviour
         mEOutputOnebyOne = null;
 
     }
-    private IEnumerator EFadeOut()
+
+    private void CastFading()
     {
-        if (mFadeInfo.FadeType.Equals(FadeType.Out))
-        {
-            float sumTime = 0f;
-
-            while (sumTime / mFadeInfo.FadeTime < 1f)
-            {
-                sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
-
-                #region Color Interpolation
-                Color lerpColor = mTextInfo.color; 
-                
-                lerpColor.a = Mathf.Lerp(1f, 0f, sumTime / mFadeInfo.FadeTime);
-                #endregion
-                for (int i = 0; i < mUnstables.Length; i++)
-                {
-                    if (mUnstables[i].TryGetComponent(out Text text))
-                    {
-                        text.color = lerpColor;
-                    }
-                }
-                yield return null;
-            }
-            if (mFadeInfo.IsFadedDisable)
-            {
-                gameObject.SetActive(false);
-            }
+        if (mEFading != null) {
+            StopCoroutine(mEFading); mEFading = null;
         }
+        StartCoroutine(mEFading = EFading(mFadeInfo.FadeType));
     }
-
-    private IEnumerator EFadeIn()
+    private IEnumerator EFading(FadeType fadeType)
     {
-        if (mFadeInfo.FadeType.Equals(FadeType.In))
+        float sumTime = 0f;
+
+        while (sumTime / mFadeInfo.FadeTime < 1f)
         {
-            float sumTime = 0f;
+            sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
 
-            while (sumTime / mFadeInfo.FadeTime < 1f)
+            Color lerpColor = mTextInfo.color;
+
+            switch (fadeType)
             {
-                sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
+                case FadeType.In:
+                    lerpColor.a = Mathf.Lerp(0f, 1f, sumTime / mFadeInfo.FadeTime);
+                    break;
 
-                #region Color Interpolation
-                Color lerpColor = mTextInfo.color;
-
-                lerpColor.a = Mathf.Lerp(0f, 1f, sumTime / mFadeInfo.FadeTime);
-                #endregion
-                for (int i = 0; i < mUnstables.Length; i++)
-                {
-                    if (mUnstables[i].TryGetComponent(out Text text))
-                    {
-                        text.color = lerpColor;
-                    }
-                }
-                yield return null;
+                case FadeType.Out:
+                    lerpColor.a = Mathf.Lerp(1f, 0f, sumTime / mFadeInfo.FadeTime);
+                    break;
             }
+            for (int i = 0; i < mUnstables.Length; i++)
+            {
+                if (mUnstables[i].TryGetComponent(out Text text))
+                {
+                    text.color = lerpColor;
+                }
+            }
+            yield return null;
         }
+        if (fadeType.Equals(FadeType.Out) && mFadeInfo.IsFadedDisable)
+        {
+            gameObject.SetActive(false);
+        }
+        yield break;
     }
 
     private IEnumerator EOutputOnebyOne()

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine.UI;
 
-public class TextPrintEditor : EditorWindow
+public class TextDetailEditor : EditorWindow
 {
     private UnstableText mUnstable;
 
@@ -13,10 +13,10 @@ public class TextPrintEditor : EditorWindow
 
     private bool mIsPrinOnebyOne;
 
-    [MenuItem("Tools/Unstable Text/Text Print Edit")]
+    [MenuItem("Tools/Unstable Text/Edit Text Detail")]
     private static void Init()
     {
-        TextPrintEditor window = EditorWindow.GetWindow(typeof(TextPrintEditor)) as TextPrintEditor;
+        TextDetailEditor window = EditorWindow.GetWindow(typeof(TextDetailEditor)) as TextDetailEditor;
 
         window.Show();
     }

@@ -87,19 +87,11 @@ public class UnstableText : MonoBehaviour
     public void Setting(string message) => mMessage = message;
 
     public void Setting(UnstCInfo info) => mTextInfo = info;
+    public void Setting(FadeCInfo info) => mFadeInfo = info;
 
     public void Setting(string message, float letterSpace, float interval)
     {
         mMessage = message; mLetterSpace = letterSpace; mInterval = interval;
-    }
-
-    public void Setting(FadeType fadeType, float fadeTime, bool usingTimeScale, bool disable)
-    {
-        mFadeInfo.FadeType = fadeType;
-        mFadeInfo.FadeTime = fadeTime;
-
-        mFadeInfo.IsUsingTimeScale = usingTimeScale;
-        mFadeInfo.IsFadedDisable   = disable;
     }
 
     private void OnEnable()

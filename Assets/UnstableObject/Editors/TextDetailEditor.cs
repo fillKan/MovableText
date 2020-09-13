@@ -13,12 +13,7 @@ public class TextDetailEditor : EditorWindow
 
     private bool mIsPrinOnebyOne;
 
-    private FadeType mFadeType;
-
-    private float mFadeTime;
-
-    private bool mIsUsingTimeScale;
-    private bool mIsFadedDisable;
+    private FadeCInfo mFadeInfo;
 
     [MenuItem("Tools/Unstable Text/Edit Text Detail")]
     private static void Init()
@@ -43,11 +38,7 @@ public class TextDetailEditor : EditorWindow
                 mLetterSpace = mUnstable.LetterSpace;
                 mInterval    = mUnstable.Interval;
 
-                mFadeType = mUnstable.GetFadeInfo.FadeType;
-                mFadeTime = mUnstable.GetFadeInfo.FadeTime;
-
-                mIsUsingTimeScale = mUnstable.GetFadeInfo.IsUsingTimeScale;
-                  mIsFadedDisable = mUnstable.GetFadeInfo.IsFadedDisable;
+                mFadeInfo = mUnstable.GetFadeInfo;
 
                 mIsPrinOnebyOne = mUnstable.IsPrintOnebyOne;
             }
@@ -77,16 +68,16 @@ public class TextDetailEditor : EditorWindow
         GUILayout.Space(2.5f);
 
         GUILayout.Label("Fade Type", EditorStyles.label);
-        mFadeType = (FadeType)EditorGUILayout.EnumPopup(mFadeType);
+        mFadeInfo.FadeType = (FadeType)EditorGUILayout.EnumPopup(mFadeInfo.FadeType);
 
         GUILayout.Label("Fade Time", EditorStyles.label);
-        mFadeTime = EditorGUILayout.FloatField(mFadeTime);
+        mFadeInfo.FadeTime = EditorGUILayout.FloatField(mFadeInfo.FadeTime);
 
-        mIsUsingTimeScale = 
-        EditorGUILayout.Toggle("Is Using Time Scale", mIsUsingTimeScale);
+        mFadeInfo.IsUsingTimeScale = 
+        EditorGUILayout.Toggle("Is Using Time Scale", mFadeInfo.IsUsingTimeScale);
 
-        mIsFadedDisable =
-        EditorGUILayout.Toggle("Is Faded Disable", mIsFadedDisable);
+        mFadeInfo.IsFadedDisable =
+        EditorGUILayout.Toggle("Is Faded Disable", mFadeInfo.IsFadedDisable);
 
         GUILayout.Space(3f);
 
@@ -96,7 +87,7 @@ public class TextDetailEditor : EditorWindow
 
             mUnstable.Setting(mMessage, mLetterSpace, mInterval);
 
-            mUnstable.Setting(mFadeType, mFadeTime, mIsUsingTimeScale, mIsFadedDisable);
+            mUnstable.Setting(mFadeInfo);
 
             mUnstable.IsPrintOnebyOne = mIsPrinOnebyOne;
         }

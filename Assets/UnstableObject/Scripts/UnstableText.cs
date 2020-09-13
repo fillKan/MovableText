@@ -126,11 +126,16 @@ public class UnstableText : MonoBehaviour
             {
                 sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
 
+                #region Color Interpolation
+                Color lerpColor = mTextInfo.color; 
+                
+                lerpColor.a = Mathf.Lerp(1f, 0f, sumTime / mFadeInfo.FadeTime);
+                #endregion
                 for (int i = 0; i < mUnstables.Length; i++)
                 {
                     if (mUnstables[i].TryGetComponent(out Text text))
                     {
-                        text.color = Color.Lerp(text.color, Color.clear, sumTime / mFadeInfo.FadeTime);
+                        text.color = lerpColor;
                     }
                 }
                 yield return null;

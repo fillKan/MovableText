@@ -77,6 +77,11 @@ public class UnstableText : MonoBehaviour
     public  UnstCInfo GetTextInfo => mTextInfo;
     [SerializeField]
     private UnstCInfo mTextInfo;
+
+    public  FadeCInfo GetFadeInfo => mFadeInfo;
+    [SerializeField]
+    private FadeCInfo mFadeInfo;
+
     public void Setting(string message) => mMessage = message;
 
     public void Setting(UnstCInfo info) => mTextInfo = info;
@@ -88,9 +93,9 @@ public class UnstableText : MonoBehaviour
 
     private void OnEnable()
     {
-        if (IsPrintOnebyOne) {
+        CheckUnstArray();
 
-            CheckUnstArray();
+        if (IsPrintOnebyOne) {
 
             for (int i = 0; i < mUnstables.Length; i++)
             {
@@ -98,8 +103,9 @@ public class UnstableText : MonoBehaviour
 
                 mUnstables[i].transform.localPosition = Vector2.zero;
             }
-            StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());
+            StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());           
         }
+        StartCoroutine(EFadeOut());
     }
 
     private void OnDisable()
@@ -110,7 +116,31 @@ public class UnstableText : MonoBehaviour
         mEOutputOnebyOne = null;
 
     }
+    private IEnumerator EFadeOut()
+    {
+        if (mFadeInfo.FadeType.Equals(FadeType.Out))
+        {
+            float sumTime = 0f;
 
+            while (sumTime / mFadeInfo.FadeTime < 1f)
+            {
+                sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
+
+                for (int i = 0; i < mUnstables.Length; i++)
+                {
+                    if (mUnstables[i].TryGetComponent(out Text text))
+                    {
+                        text.color = Color.Lerp(text.color, Color.clear, sumTime / mFadeInfo.FadeTime);
+                    }
+                }
+                yield return null;
+            }
+            if (mFadeInfo.IsFadedDisable)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
     private IEnumerator EOutputOnebyOne()
     {
         int iteration = 0;

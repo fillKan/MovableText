@@ -93,6 +93,15 @@ public class UnstableText : MonoBehaviour
         mMessage = message; mLetterSpace = letterSpace; mInterval = interval;
     }
 
+    public void Setting(FadeType fadeType, float fadeTime, bool usingTimeScale, bool disable)
+    {
+        mFadeInfo.FadeType = fadeType;
+        mFadeInfo.FadeTime = fadeTime;
+
+        mFadeInfo.IsUsingTimeScale = usingTimeScale;
+        mFadeInfo.IsFadedDisable   = disable;
+    }
+
     private void OnEnable()
     {
         CheckUnstArray();

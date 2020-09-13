@@ -96,6 +96,8 @@ public class TextDetailEditor : EditorWindow
 
             mUnstable.Setting(mMessage, mLetterSpace, mInterval);
 
+            mUnstable.Setting(mFadeType, mFadeTime, mIsUsingTimeScale, mIsFadedDisable);
+
             mUnstable.IsPrintOnebyOne = mIsPrinOnebyOne;
         }
     }

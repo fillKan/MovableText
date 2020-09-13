@@ -106,6 +106,7 @@ public class UnstableText : MonoBehaviour
             StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());           
         }
         StartCoroutine(EFadeOut());
+        StartCoroutine(EFadeIn());
     }
 
     private void OnDisable()
@@ -146,6 +147,34 @@ public class UnstableText : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator EFadeIn()
+    {
+        if (mFadeInfo.FadeType.Equals(FadeType.In))
+        {
+            float sumTime = 0f;
+
+            while (sumTime / mFadeInfo.FadeTime < 1f)
+            {
+                sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
+
+                #region Color Interpolation
+                Color lerpColor = mTextInfo.color;
+
+                lerpColor.a = Mathf.Lerp(0f, 1f, sumTime / mFadeInfo.FadeTime);
+                #endregion
+                for (int i = 0; i < mUnstables.Length; i++)
+                {
+                    if (mUnstables[i].TryGetComponent(out Text text))
+                    {
+                        text.color = lerpColor;
+                    }
+                }
+                yield return null;
+            }
+        }
+    }
+
     private IEnumerator EOutputOnebyOne()
     {
         int iteration = 0;

@@ -212,7 +212,7 @@ public class MessageEditButton : Editor
         GUILayout.Space(8f);
 
         if (!EditorApplication.isPlaying && 
-             GUILayout.Button("Apply to changed message", GUILayout.Height(25f)))
+             GUILayout.Button("Apply to changed", GUILayout.Height(25f)))
         {
             UnstableText unstableText = target as UnstableText;
 
@@ -237,13 +237,17 @@ public class MessageEditButton : Editor
             #endregion
             for (int i = 0; i < messageLength; i++)
             {
+                Undo.RecordObject(unstTransform.GetChild(i), unstableText.Message);
+
+                if (unstableText.transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
+                {
+                    unstable.Setting(unstableText.GetTextInfo);
+                }
                 if (i >= unstTransform.childCount)
                 {
                     Unst.RegisterCharObject(i, unstableText.Message[i], unstableText.GetTextInfo)
                         .transform.parent = unstTransform;
                 }
-                Undo.RecordObject(unstTransform.GetChild(i), unstableText.Message);
-
                 unstTransform.GetChild(i).SetLetterSpace(messageLength, unstableText.LetterSpace, i);
 
                 if (unstTransform.GetChild(i).TryGetComponent(out Text text)) 

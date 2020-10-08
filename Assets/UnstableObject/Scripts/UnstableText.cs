@@ -237,16 +237,17 @@ public class MessageEditButton : Editor
             #endregion
             for (int i = 0; i < messageLength; i++)
             {
+                if (i >= unstTransform.childCount)
+                {
+                    Unst.RegisterCharObject(i, unstableText.Message[i], unstableText.GetTextInfo)
+                        .transform.parent = unstTransform;
+                }
+
                 Undo.RecordObject(unstTransform.GetChild(i), unstableText.Message);
 
                 if (unstableText.transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
                 {
                     unstable.Setting(unstableText.GetTextInfo);
-                }
-                if (i >= unstTransform.childCount)
-                {
-                    Unst.RegisterCharObject(i, unstableText.Message[i], unstableText.GetTextInfo)
-                        .transform.parent = unstTransform;
                 }
                 unstTransform.GetChild(i).SetLetterSpace(messageLength, unstableText.LetterSpace, i);
 

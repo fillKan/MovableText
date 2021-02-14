@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum UnstableStyle
 {
@@ -30,6 +31,26 @@ public class UnstableObject : MonoBehaviour
     public void Setting(uint waitFrame, float vibration, float rotation, UnstableStyle style) {
         mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
     }
+
+    public void Setting(UnstCInfo unstCInfo)
+    {
+        mWaitFrame = unstCInfo.waitFrame;
+
+        mSTYLE = unstCInfo.unstableStyle;
+
+        mRotation  = unstCInfo.rotation;
+        mVibration = unstCInfo.vibration;
+
+        if (gameObject.TryGetComponent(out Text text))
+        {
+            text.color = unstCInfo.color;
+            text.font  = unstCInfo.font;
+
+            text.fontStyle = unstCInfo.fontStyle;
+            text.fontSize  = unstCInfo.fontSize;
+        }
+    }
+
     private void OnEnable()
     {
         StartCoroutine(mEUpdate = EUpdate());

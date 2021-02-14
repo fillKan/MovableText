@@ -8,7 +8,7 @@ public enum FadeType
     None, In, Out 
 }
 [System.Serializable]
-public struct UnstCInfo
+public struct MovCharInfo
 {
     public uint waitFrame;
 
@@ -24,7 +24,7 @@ public struct UnstCInfo
     public float rotation;
     public float vibration;
 
-    public UnstCInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, int fontSize)
+    public MovCharInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, int fontSize)
     {
         this.color     = color;
         this.fontStyle = fontStyle;
@@ -74,9 +74,9 @@ public class UnstableText : MonoBehaviour
     [SerializeField] private float mInterval;
     #endregion
 
-    public  UnstCInfo GetTextInfo => mTextInfo;
+    public  MovCharInfo GetTextInfo => mTextInfo;
     [SerializeField]
-    private UnstCInfo mTextInfo;
+    private MovCharInfo mTextInfo;
 
     public  FadeCInfo GetFadeInfo => mFadeInfo;
     [SerializeField]
@@ -86,7 +86,7 @@ public class UnstableText : MonoBehaviour
 
     public void Setting(string message) => mMessage = message;
 
-    public void Setting(UnstCInfo info) => mTextInfo = info;
+    public void Setting(MovCharInfo info) => mTextInfo = info;
     public void Setting(FadeCInfo info) => mFadeInfo = info;
 
     public void Setting(string message, float letterSpace, float interval)
@@ -239,7 +239,7 @@ public class MessageEditButton : Editor
             {
                 if (i >= unstTransform.childCount)
                 {
-                    Unst.RegisterCharObject(i, unstableText.Message[i], unstableText.GetTextInfo)
+                    Movable.CreateMovableChar(i, unstableText.Message[i], unstableText.GetTextInfo)
                         .transform.parent = unstTransform;
                 }
 

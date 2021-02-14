@@ -2,8 +2,12 @@
 using UnityEngine.UI;
 using UnityEditor;
 
-public static class UnstExtension
+public static class MovableExtension
 {
+    public static bool IsEven(this int num)
+    {
+        return (Mathf.Abs(num) & 1) == 1;
+    }
     #region COMMENT
     /// <summary>
     /// 메시지의 길이, 자간, 이 객체가 몇번째 글자인지를 고려하여 (0,0)을 기준으로 자간을 설정합니다.
@@ -14,14 +18,14 @@ public static class UnstExtension
     #endregion
     public static void SetLetterSpace(this Transform transform, int messageLength, float space, int index)
     {
-        float charOffset = (messageLength & 1).Equals(1) ? 0f : space * 0.5f;
+        float charOffset = messageLength.IsEven() ? space / 2 : 0f;
 
         transform.localPosition = Vector2.right * ((-messageLength / 2 + index) * space + charOffset);
     }
 }
-public class Unst
+public class Movable
 {
-    public static UnstableText RegisterTextObject(string name, Canvas parent, Vector3 position)
+    public static UnstableText CreateMovableText(string name, Canvas parent, Vector3 position)
     {
         GameObject @object = new GameObject(name, typeof(RectTransform), typeof(UnstableText));
 
@@ -35,7 +39,7 @@ public class Unst
         return unstable;
     }
 
-    public static UnstableObject RegisterCharObject(int index, char letter, UnstCInfo cInfo)
+    public static UnstableObject CreateMovableChar(int index, char letter, MovCharInfo cInfo)
     {
         string name = $"Character[{index}]";
 

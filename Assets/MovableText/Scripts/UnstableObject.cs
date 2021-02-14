@@ -32,7 +32,7 @@ public class UnstableObject : MonoBehaviour
         mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
     }
 
-    public void Setting(UnstCInfo unstCInfo)
+    public void Setting(MovCharInfo unstCInfo)
     {
         mWaitFrame = unstCInfo.waitFrame;
 

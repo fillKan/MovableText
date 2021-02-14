@@ -60,7 +60,7 @@ public class Movable
         }
         if (newObject.TryGetComponent(out MovableObject movable)) 
         {
-            movable.Setting(cInfo.waitFrame, cInfo.vibration, cInfo.rotation, cInfo.unstableStyle);
+            movable.Setting(cInfo.waitFrame, cInfo.vibration, cInfo.rotation, cInfo.movableStyle);
 
             return movable;
         }

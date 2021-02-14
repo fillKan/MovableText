@@ -8,7 +8,7 @@ public enum UnstableStyle
     Rotation, Vibration, RotationAndVibration
 }
 
-public class UnstableObject : MonoBehaviour
+public class MovableObject : MonoBehaviour
 {
     public  uint WaitFrame => mWaitFrame;
     public float Rotation  => mRotation;
@@ -24,7 +24,7 @@ public class UnstableObject : MonoBehaviour
 
     private IEnumerator mEUpdate;
 
-    public UnstableObject(uint waitFrame, float rotation, float vibration, UnstableStyle style) {
+    public MovableObject(uint waitFrame, float rotation, float vibration, UnstableStyle style) {
         mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
     }
 

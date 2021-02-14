@@ -24,7 +24,7 @@ public struct MovCharInfo
     public float rotation;
     public float vibration;
 
-    public MovCharInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, int fontSize)
+    public MovCharInfo(Color color, FontStyle fontStyle, Font font, MovableObject unstableObject, int fontSize)
     {
         this.color     = color;
         this.fontStyle = fontStyle;
@@ -50,14 +50,14 @@ public struct FadeCInfo
     public bool IsFadedDisable;
 }
 
-public class UnstableText : MonoBehaviour
+public class MovableText : MonoBehaviour
 {
     [SerializeField][TextArea]
     private string mMessage;
     public  string  Message
     { get => mMessage; }
 
-    private UnstableObject[] mUnstables;
+    private MovableObject[] mUnstables;
 
     #region Print OnebyOne variables
 
@@ -189,11 +189,11 @@ public class UnstableText : MonoBehaviour
     {
         if (mUnstables == null)
         {
-            mUnstables = new UnstableObject[transform.childCount];
+            mUnstables = new MovableObject[transform.childCount];
 
             for (int i = 0; i < transform.childCount; i++)
             {
-                if (transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
+                if (transform.GetChild(i).TryGetComponent(out MovableObject unstable))
                 {
                     mUnstables[i] = unstable;
                 }
@@ -202,7 +202,7 @@ public class UnstableText : MonoBehaviour
     }
 }
 
-[CustomEditor(typeof(UnstableText))]
+[CustomEditor(typeof(MovableText))]
 public class MessageEditButton : Editor
 {
     public override void OnInspectorGUI()
@@ -214,7 +214,7 @@ public class MessageEditButton : Editor
         if (!EditorApplication.isPlaying && 
              GUILayout.Button("Apply to changed", GUILayout.Height(25f)))
         {
-            UnstableText unstableText = target as UnstableText;
+            MovableText unstableText = target as MovableText;
 
             int       messageLength = unstableText.Message.Length;
             Transform unstTransform = unstableText.transform;
@@ -245,7 +245,7 @@ public class MessageEditButton : Editor
 
                 Undo.RecordObject(unstTransform.GetChild(i), unstableText.Message);
 
-                if (unstableText.transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
+                if (unstableText.transform.GetChild(i).TryGetComponent(out MovableObject unstable))
                 {
                     unstable.Setting(unstableText.GetTextInfo);
                 }

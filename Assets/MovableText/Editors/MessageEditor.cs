@@ -78,17 +78,17 @@ public class MessageEditor : EditorWindow
     }
     private void Create()
     {
-        UnstableText unstableText = Movable.CreateMovableText(mName, mCanvas, mPosition);
+        MovableText unstableText = Movable.CreateMovableText(mName, mCanvas, mPosition);
 
         MovCharInfo unstCInfo 
-            = new MovCharInfo(mColor, mFontStyle, mFont, new UnstableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
+            = new MovCharInfo(mColor, mFontStyle, mFont, new MovableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
 
         unstableText.Setting(mMessage, mLetterSpacing, 0f);
         unstableText.Setting(unstCInfo);
 
         for (int i = 0; i < mMessage.Length; i++)
         {
-            UnstableObject createChar = Movable.CreateMovableChar(i, mMessage[i], unstCInfo);
+            MovableObject createChar = Movable.CreateMovableChar(i, mMessage[i], unstCInfo);
 
             createChar.transform.parent = unstableText.transform;
             createChar.transform.SetLetterSpace(mMessage.Length, mLetterSpacing, i);

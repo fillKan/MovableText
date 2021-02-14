@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TextDetailEditor : EditorWindow
 {
-    private UnstableText mUnstable;
+    private MovableText mUnstable;
 
     private string mMessage;
 
@@ -26,7 +26,7 @@ public class TextDetailEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Space(8f);
-        mUnstable = (UnstableText)EditorGUILayout.ObjectField("Edit Target", mUnstable, typeof(UnstableText), true);
+        mUnstable = (MovableText)EditorGUILayout.ObjectField("Edit Target", mUnstable, typeof(MovableText), true);
         GUILayout.Space(2f);
 
         if (GUILayout.Button("Extraction"))

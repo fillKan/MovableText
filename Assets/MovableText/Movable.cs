@@ -25,25 +25,25 @@ public static class MovableExtension
 }
 public class Movable
 {
-    public static UnstableText CreateMovableText(string name, Canvas parent, Vector3 position)
+    public static MovableText CreateMovableText(string name, Canvas parent, Vector3 position)
     {
-        GameObject @object = new GameObject(name, typeof(RectTransform), typeof(UnstableText));
+        GameObject @object = new GameObject(name, typeof(RectTransform), typeof(MovableText));
 
         Undo.RegisterCreatedObjectUndo(@object, name);
 
                    @object.transform.parent        = parent.transform;
                    @object.transform.localPosition = position;
 
-        Debug.Assert(@object.TryGetComponent(out UnstableText unstable));
+        Debug.Assert(@object.TryGetComponent(out MovableText movable));
 
-        return unstable;
+        return movable;
     }
 
-    public static UnstableObject CreateMovableChar(int index, char letter, MovCharInfo cInfo)
+    public static MovableObject CreateMovableChar(int index, char letter, MovCharInfo cInfo)
     {
         string name = $"Character[{index}]";
 
-        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(UnstableObject));
+        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(MovableObject));
 
         Undo.RegisterCreatedObjectUndo(newObject, name);
 
@@ -58,11 +58,11 @@ public class Movable
             text.text = letter.ToString();
             text.font = cInfo.font; 
         }
-        if (newObject.TryGetComponent(out UnstableObject unstable)) 
+        if (newObject.TryGetComponent(out MovableObject movable)) 
         {
-            unstable.Setting(cInfo.waitFrame, cInfo.vibration, cInfo.rotation, cInfo.unstableStyle);
+            movable.Setting(cInfo.waitFrame, cInfo.vibration, cInfo.rotation, cInfo.unstableStyle);
 
-            return unstable;
+            return movable;
         }
         return null;
     }

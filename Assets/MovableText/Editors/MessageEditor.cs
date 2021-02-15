@@ -23,7 +23,7 @@ public class MessageEditor : EditorWindow
     private FontStyle mFontStyle = FontStyle.Normal;
     private MovableStyle mUnstable = MovableStyle.Rotation;
 
-    [MenuItem("Tools/Unstable Text/Create")]
+    [MenuItem("Tools/Movable Text/Create")]
     private static void Init()
     {
         MessageEditor window = EditorWindow.GetWindow(typeof(MessageEditor)) as MessageEditor;

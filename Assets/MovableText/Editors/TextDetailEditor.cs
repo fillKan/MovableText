@@ -15,7 +15,7 @@ public class TextDetailEditor : EditorWindow
 
     private FadeCInfo mFadeInfo;
 
-    [MenuItem("Tools/Unstable Text/Edit Text Detail")]
+    [MenuItem("Tools/Movable Text/Edit Text Detail")]
     private static void Init()
     {
         TextDetailEditor window = EditorWindow.GetWindow(typeof(TextDetailEditor)) as TextDetailEditor;

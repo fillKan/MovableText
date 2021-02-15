@@ -10,36 +10,30 @@ public enum MovableStyle
 
 public class MovableObject : MonoBehaviour
 {
-    public  uint WaitFrame => mWaitFrame;
-    public float Rotation  => mRotation;
-    public float Vibration => mVibration;
-    public MovableStyle STYLE => mSTYLE;
-
-    [SerializeField] private  uint mWaitFrame;
-    [SerializeField] private float mRotation;
-    [SerializeField] private float mVibration;
-    [SerializeField] private MovableStyle mSTYLE;
-
+    public  uint WaitFrame;
+    public float Rotation;
+    public float Vibration;
+    public MovableStyle STYLE;
     public Vector2 PivotPoint;
 
     private IEnumerator mEUpdate;
 
     public MovableObject(uint waitFrame, float rotation, float vibration, MovableStyle style) {
-        mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
+        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; STYLE = style;
     }
 
     public void Setting(uint waitFrame, float vibration, float rotation, MovableStyle style) {
-        mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
+        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; STYLE = style;
     }
 
     public void Setting(MovCharInfo movCInfo)
     {
-        mWaitFrame = movCInfo.waitFrame;
+        WaitFrame = movCInfo.waitFrame;
 
-        mSTYLE = movCInfo.movableStyle;
+        STYLE = movCInfo.movableStyle;
 
-        mRotation  = movCInfo.rotation;
-        mVibration = movCInfo.vibration;
+        Rotation  = movCInfo.rotation;
+        Vibration = movCInfo.vibration;
 
         if (gameObject.TryGetComponent(out Text text))
         {
@@ -68,21 +62,21 @@ public class MovableObject : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            for (uint i = 0; i < mWaitFrame; i++) { yield return null; }
+            for (uint i = 0; i < WaitFrame; i++) { yield return null; }
 
-            switch (mSTYLE)
+            switch (STYLE)
             {
                 case MovableStyle.Rotation:
-                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * Rotation * Random.Range(-1f, 1f));
                     break;
 
                 case MovableStyle.Vibration:
-                    transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
+                    transform.localPosition = PivotPoint + Random.insideUnitCircle * Vibration;
                     break;
 
                 case MovableStyle.RotationAndVibration:
-                    transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
-                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
+                    transform.localPosition = PivotPoint + Random.insideUnitCircle * Vibration;
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * Rotation * Random.Range(-1f, 1f));
                     break;
                 default:
                     break;

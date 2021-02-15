@@ -3,51 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum UnstableStyle
+public enum MovableStyle
 {
     Rotation, Vibration, RotationAndVibration
 }
 
-public class UnstableObject : MonoBehaviour
+public class MovableObject : MonoBehaviour
 {
     public  uint WaitFrame => mWaitFrame;
     public float Rotation  => mRotation;
     public float Vibration => mVibration;
-    public UnstableStyle STYLE => mSTYLE;
+    public MovableStyle STYLE => mSTYLE;
 
     [SerializeField] private  uint mWaitFrame;
     [SerializeField] private float mRotation;
     [SerializeField] private float mVibration;
-    [SerializeField] private UnstableStyle mSTYLE;
+    [SerializeField] private MovableStyle mSTYLE;
 
     public Vector2 PivotPoint;
 
     private IEnumerator mEUpdate;
 
-    public UnstableObject(uint waitFrame, float rotation, float vibration, UnstableStyle style) {
+    public MovableObject(uint waitFrame, float rotation, float vibration, MovableStyle style) {
         mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
     }
 
-    public void Setting(uint waitFrame, float vibration, float rotation, UnstableStyle style) {
+    public void Setting(uint waitFrame, float vibration, float rotation, MovableStyle style) {
         mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
     }
 
-    public void Setting(UnstCInfo unstCInfo)
+    public void Setting(MovCharInfo movCInfo)
     {
-        mWaitFrame = unstCInfo.waitFrame;
+        mWaitFrame = movCInfo.waitFrame;
 
-        mSTYLE = unstCInfo.unstableStyle;
+        mSTYLE = movCInfo.movableStyle;
 
-        mRotation  = unstCInfo.rotation;
-        mVibration = unstCInfo.vibration;
+        mRotation  = movCInfo.rotation;
+        mVibration = movCInfo.vibration;
 
         if (gameObject.TryGetComponent(out Text text))
         {
-            text.color = unstCInfo.color;
-            text.font  = unstCInfo.font;
+            text.color = movCInfo.color;
+            text.font  = movCInfo.font;
 
-            text.fontStyle = unstCInfo.fontStyle;
-            text.fontSize  = unstCInfo.fontSize;
+            text.fontStyle = movCInfo.fontStyle;
+            text.fontSize  = movCInfo.fontSize;
         }
     }
 
@@ -72,15 +72,15 @@ public class UnstableObject : MonoBehaviour
 
             switch (mSTYLE)
             {
-                case UnstableStyle.Rotation:
+                case MovableStyle.Rotation:
                     transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
                     break;
 
-                case UnstableStyle.Vibration:
+                case MovableStyle.Vibration:
                     transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
                     break;
 
-                case UnstableStyle.RotationAndVibration:
+                case MovableStyle.RotationAndVibration:
                     transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
                     transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
                     break;

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TextDetailEditor : EditorWindow
 {
-    private UnstableText mUnstable;
+    private MovableText mUnstable;
 
     private string mMessage;
 
@@ -15,7 +15,7 @@ public class TextDetailEditor : EditorWindow
 
     private FadeCInfo mFadeInfo;
 
-    [MenuItem("Tools/Unstable Text/Edit Text Detail")]
+    [MenuItem("Tools/Movable Text/Edit Text Detail")]
     private static void Init()
     {
         TextDetailEditor window = EditorWindow.GetWindow(typeof(TextDetailEditor)) as TextDetailEditor;
@@ -26,7 +26,7 @@ public class TextDetailEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Space(8f);
-        mUnstable = (UnstableText)EditorGUILayout.ObjectField("Edit Target", mUnstable, typeof(UnstableText), true);
+        mUnstable = (MovableText)EditorGUILayout.ObjectField("Edit Target", mUnstable, typeof(MovableText), true);
         GUILayout.Space(2f);
 
         if (GUILayout.Button("Extraction"))

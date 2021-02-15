@@ -8,7 +8,7 @@ public enum FadeType
     None, In, Out 
 }
 [System.Serializable]
-public struct UnstCInfo
+public struct MovCharInfo
 {
     public uint waitFrame;
 
@@ -16,7 +16,7 @@ public struct UnstCInfo
 
     public FontStyle fontStyle;
 
-    public UnstableStyle unstableStyle;
+    public MovableStyle movableStyle;
 
     public Font font;
 
@@ -24,18 +24,18 @@ public struct UnstCInfo
     public float rotation;
     public float vibration;
 
-    public UnstCInfo(Color color, FontStyle fontStyle, Font font, UnstableObject unstableObject, int fontSize)
+    public MovCharInfo(Color color, FontStyle fontStyle, Font font, MovableObject movableObject, int fontSize)
     {
         this.color     = color;
         this.fontStyle = fontStyle;
         this.font      = font;
         this.fontSize  = fontSize;
 
-        rotation  = unstableObject.Rotation;
-        vibration = unstableObject.Vibration;
-        waitFrame = unstableObject.WaitFrame;
+        rotation  = movableObject.Rotation;
+        vibration = movableObject.Vibration;
+        waitFrame = movableObject.WaitFrame;
 
-        unstableStyle = unstableObject.STYLE;
+        movableStyle = movableObject.STYLE;
     }
 }
 
@@ -50,14 +50,14 @@ public struct FadeCInfo
     public bool IsFadedDisable;
 }
 
-public class UnstableText : MonoBehaviour
+public class MovableText : MonoBehaviour
 {
     [SerializeField][TextArea]
     private string mMessage;
     public  string  Message
     { get => mMessage; }
 
-    private UnstableObject[] mUnstables;
+    private MovableObject[] _MovObjectArray;
 
     #region Print OnebyOne variables
 
@@ -74,9 +74,9 @@ public class UnstableText : MonoBehaviour
     [SerializeField] private float mInterval;
     #endregion
 
-    public  UnstCInfo GetTextInfo => mTextInfo;
+    public  MovCharInfo GetTextInfo => mTextInfo;
     [SerializeField]
-    private UnstCInfo mTextInfo;
+    private MovCharInfo mTextInfo;
 
     public  FadeCInfo GetFadeInfo => mFadeInfo;
     [SerializeField]
@@ -86,7 +86,7 @@ public class UnstableText : MonoBehaviour
 
     public void Setting(string message) => mMessage = message;
 
-    public void Setting(UnstCInfo info) => mTextInfo = info;
+    public void Setting(MovCharInfo info) => mTextInfo = info;
     public void Setting(FadeCInfo info) => mFadeInfo = info;
 
     public void Setting(string message, float letterSpace, float interval)
@@ -96,15 +96,15 @@ public class UnstableText : MonoBehaviour
 
     private void OnEnable()
     {
-        CheckUnstArray();
+        CheckMovObjectArray();
 
         if (IsPrintOnebyOne) {
 
-            for (int i = 0; i < mUnstables.Length; i++)
+            for (int i = 0; i < _MovObjectArray.Length; i++)
             {
-                mUnstables[i].gameObject.SetActive(false);
+                _MovObjectArray[i].gameObject.SetActive(false);
 
-                mUnstables[i].transform.localPosition = Vector2.zero;
+                _MovObjectArray[i].transform.localPosition = Vector2.zero;
             }
             StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());           
         }
@@ -147,9 +147,9 @@ public class UnstableText : MonoBehaviour
                     lerpColor.a = Mathf.Lerp(1f, 0f, sumTime / mFadeInfo.FadeTime);
                     break;
             }
-            for (int i = 0; i < mUnstables.Length; i++)
+            for (int i = 0; i < _MovObjectArray.Length; i++)
             {
-                if (mUnstables[i].TryGetComponent(out Text text))
+                if (_MovObjectArray[i].TryGetComponent(out Text text))
                 {
                     text.color = lerpColor;
                 }
@@ -172,37 +172,37 @@ public class UnstableText : MonoBehaviour
             for (float i = 0f; i < mInterval; i += Time.deltaTime * Time.timeScale) {
                 yield return null;
             }
-            mUnstables[iteration++].gameObject.SetActive(true);
+            _MovObjectArray[iteration++].gameObject.SetActive(true);
 
             for (int i = 0; i < iteration; i++)
             {
                 Vector2 translate = ((i == iteration - 1) ? Vector2.right * i : Vector2.left) * mLetterSpace * 0.5f;
 
-                mUnstables[i].PivotPoint += translate;
+                _MovObjectArray[i].PivotPoint += translate;
 
-                mUnstables[i].transform.localPosition += (Vector3)translate;
+                _MovObjectArray[i].transform.localPosition += (Vector3)translate;
             }
         }        
         yield break;
     }
-    private void CheckUnstArray()
+    private void CheckMovObjectArray()
     {
-        if (mUnstables == null)
+        if (_MovObjectArray == null)
         {
-            mUnstables = new UnstableObject[transform.childCount];
+            _MovObjectArray = new MovableObject[transform.childCount];
 
             for (int i = 0; i < transform.childCount; i++)
             {
-                if (transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
+                if (transform.GetChild(i).TryGetComponent(out MovableObject unstable))
                 {
-                    mUnstables[i] = unstable;
+                    _MovObjectArray[i] = unstable;
                 }
             }
         }
     }
 }
 
-[CustomEditor(typeof(UnstableText))]
+[CustomEditor(typeof(MovableText))]
 public class MessageEditButton : Editor
 {
     public override void OnInspectorGUI()
@@ -214,10 +214,10 @@ public class MessageEditButton : Editor
         if (!EditorApplication.isPlaying && 
              GUILayout.Button("Apply to changed", GUILayout.Height(25f)))
         {
-            UnstableText unstableText = target as UnstableText;
+            MovableText movableText = target as MovableText;
 
-            int       messageLength = unstableText.Message.Length;
-            Transform unstTransform = unstableText.transform;
+            int       messageLength = movableText.Message.Length;
+            Transform movTransform  = movableText.transform;
 
             #region Summary
             /*=================================================================================
@@ -225,9 +225,9 @@ public class MessageEditButton : Editor
              * 만약 불안정문자의 수가 메시지의 길이보다 많다면, 제일 뒤에있는 불안정문자를 제거한다. 
              *=================================================================================*/
             #endregion
-            while (messageLength < unstTransform.childCount) {
+            while (messageLength < movTransform.childCount) {
 
-               Undo.DestroyObjectImmediate(unstTransform.GetChild(unstTransform.childCount - 1).gameObject);
+               Undo.DestroyObjectImmediate(movTransform.GetChild(movTransform.childCount - 1).gameObject);
             }
             #region Summary
             /*=================================================================================
@@ -237,25 +237,25 @@ public class MessageEditButton : Editor
             #endregion
             for (int i = 0; i < messageLength; i++)
             {
-                if (i >= unstTransform.childCount)
+                if (i >= movTransform.childCount)
                 {
-                    Unst.RegisterCharObject(i, unstableText.Message[i], unstableText.GetTextInfo)
-                        .transform.parent = unstTransform;
+                    Movable.CreateMovableChar(i, movableText.Message[i], movableText.GetTextInfo)
+                        .transform.parent = movTransform;
                 }
 
-                Undo.RecordObject(unstTransform.GetChild(i), unstableText.Message);
+                Undo.RecordObject(movTransform.GetChild(i), movableText.Message);
 
-                if (unstableText.transform.GetChild(i).TryGetComponent(out UnstableObject unstable))
+                if (movableText.transform.GetChild(i).TryGetComponent(out MovableObject movable))
                 {
-                    unstable.Setting(unstableText.GetTextInfo);
+                    movable.Setting(movableText.GetTextInfo);
                 }
-                unstTransform.GetChild(i).SetLetterSpace(messageLength, unstableText.LetterSpace, i);
+                movTransform.GetChild(i).SetLetterSpace(messageLength, movableText.LetterSpace, i);
 
-                if (unstTransform.GetChild(i).TryGetComponent(out Text text)) 
+                if (movTransform.GetChild(i).TryGetComponent(out Text text)) 
                 {
                     Undo.RecordObject(text, "Apply to changed text");
 
-                    text.text = unstableText.Message[i].ToString();
+                    text.text = movableText.Message[i].ToString();
                 }
             }
         }

@@ -10,27 +10,28 @@ public enum MovableStyle
 
 public class MovableObject : MonoBehaviour
 {
-    public  uint WaitFrame;
+    public uint WaitFrame;
+    [HideInInspector]
+    public uint WaitingFrame;
+
     public float Rotation;
     public float Vibration;
-    public MovableStyle STYLE;
+    public MovableStyle Style;
     public Vector2 PivotPoint;
 
-    private IEnumerator mEUpdate;
-
     public MovableObject(uint waitFrame, float rotation, float vibration, MovableStyle style) {
-        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; STYLE = style;
+        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; Style = style;
     }
 
     public void Setting(uint waitFrame, float vibration, float rotation, MovableStyle style) {
-        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; STYLE = style;
+        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; Style = style;
     }
 
     public void Setting(MovCharInfo movCInfo)
     {
         WaitFrame = movCInfo.waitFrame;
 
-        STYLE = movCInfo.movableStyle;
+        Style = movCInfo.movableStyle;
 
         Rotation  = movCInfo.rotation;
         Vibration = movCInfo.vibration;
@@ -45,26 +46,11 @@ public class MovableObject : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void UpdateMe()
     {
-        StartCoroutine(mEUpdate = EUpdate());
-
-        PivotPoint = transform.localPosition;
-    }
-    private void OnDisable()
-    {
-        if (mEUpdate != null) {
-            StopCoroutine(mEUpdate);
-        }
-        mEUpdate = null;
-    }
-    private IEnumerator EUpdate()
-    {
-        while (gameObject.activeSelf)
+        if (++WaitingFrame >= WaitFrame)
         {
-            for (uint i = 0; i < WaitFrame; i++) { yield return null; }
-
-            switch (STYLE)
+            switch (Style)
             {
                 case MovableStyle.Rotation:
                     transform.localRotation = Quaternion.Euler(Vector3.forward * Rotation * Random.Range(-1f, 1f));
@@ -81,7 +67,12 @@ public class MovableObject : MonoBehaviour
                 default:
                     break;
             }
-            
+            WaitingFrame = 0;
         }
+    }
+
+    private void OnEnable()
+    {
+        PivotPoint = transform.localPosition;
     }
 }

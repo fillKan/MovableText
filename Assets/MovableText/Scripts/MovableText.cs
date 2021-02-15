@@ -35,7 +35,7 @@ public struct MovCharInfo
         vibration = movableObject.Vibration;
         waitFrame = movableObject.WaitFrame;
 
-        movableStyle = movableObject.STYLE;
+        movableStyle = movableObject.Style;
     }
 }
 
@@ -118,6 +118,14 @@ public class MovableText : MonoBehaviour
         }
         mEOutputOnebyOne = null;
 
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < _MovObjectArray.Length; ++i)
+        {
+            _MovObjectArray[i].UpdateMe();
+        }
     }
 
     private void CastFading()

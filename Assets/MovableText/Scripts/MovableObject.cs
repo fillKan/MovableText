@@ -10,36 +10,31 @@ public enum MovableStyle
 
 public class MovableObject : MonoBehaviour
 {
-    public  uint WaitFrame => mWaitFrame;
-    public float Rotation  => mRotation;
-    public float Vibration => mVibration;
-    public MovableStyle STYLE => mSTYLE;
+    public uint WaitFrame;
+    [HideInInspector]
+    public uint WaitingFrame;
 
-    [SerializeField] private  uint mWaitFrame;
-    [SerializeField] private float mRotation;
-    [SerializeField] private float mVibration;
-    [SerializeField] private MovableStyle mSTYLE;
-
+    public float Rotation;
+    public float Vibration;
+    public MovableStyle Style;
     public Vector2 PivotPoint;
 
-    private IEnumerator mEUpdate;
-
     public MovableObject(uint waitFrame, float rotation, float vibration, MovableStyle style) {
-        mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
+        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; Style = style;
     }
 
     public void Setting(uint waitFrame, float vibration, float rotation, MovableStyle style) {
-        mWaitFrame = waitFrame; mVibration = vibration; mRotation = rotation; mSTYLE = style;
+        WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; Style = style;
     }
 
     public void Setting(MovCharInfo movCInfo)
     {
-        mWaitFrame = movCInfo.waitFrame;
+        WaitFrame = movCInfo.waitFrame;
 
-        mSTYLE = movCInfo.movableStyle;
+        Style = movCInfo.movableStyle;
 
-        mRotation  = movCInfo.rotation;
-        mVibration = movCInfo.vibration;
+        Rotation  = movCInfo.rotation;
+        Vibration = movCInfo.vibration;
 
         if (gameObject.TryGetComponent(out Text text))
         {
@@ -51,43 +46,33 @@ public class MovableObject : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void UpdateMe()
     {
-        StartCoroutine(mEUpdate = EUpdate());
-
-        PivotPoint = transform.localPosition;
-    }
-    private void OnDisable()
-    {
-        if (mEUpdate != null) {
-            StopCoroutine(mEUpdate);
-        }
-        mEUpdate = null;
-    }
-    private IEnumerator EUpdate()
-    {
-        while (gameObject.activeSelf)
+        if (++WaitingFrame >= WaitFrame)
         {
-            for (uint i = 0; i < mWaitFrame; i++) { yield return null; }
-
-            switch (mSTYLE)
+            switch (Style)
             {
                 case MovableStyle.Rotation:
-                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * Rotation * Random.Range(-1f, 1f));
                     break;
 
                 case MovableStyle.Vibration:
-                    transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
+                    transform.localPosition = PivotPoint + Random.insideUnitCircle * Vibration;
                     break;
 
                 case MovableStyle.RotationAndVibration:
-                    transform.localPosition = PivotPoint + Random.insideUnitCircle * mVibration;
-                    transform.localRotation = Quaternion.Euler(Vector3.forward * mRotation * Random.Range(-1f, 1f));
+                    transform.localPosition = PivotPoint + Random.insideUnitCircle * Vibration;
+                    transform.localRotation = Quaternion.Euler(Vector3.forward * Rotation * Random.Range(-1f, 1f));
                     break;
                 default:
                     break;
             }
-            
+            WaitingFrame = 0;
         }
+    }
+
+    private void OnEnable()
+    {
+        PivotPoint = transform.localPosition;
     }
 }

@@ -73,6 +73,8 @@ public class MovableText : MonoBehaviour
     [SerializeField] private float mLetterSpace;
     [SerializeField] private float mInterval;
     #endregion
+    public HorizontalLayoutGroup LayoutGroup => _LayoutGroup;
+    [SerializeField] private HorizontalLayoutGroup _LayoutGroup;
 
     public  MovCharInfo GetTextInfo => mTextInfo;
     [SerializeField]
@@ -85,13 +87,18 @@ public class MovableText : MonoBehaviour
     private IEnumerator mEFading;
 
     public void Setting(string message) => mMessage = message;
-
     public void Setting(MovCharInfo info) => mTextInfo = info;
     public void Setting(FadeCInfo info) => mFadeInfo = info;
-
-    public void Setting(string message, float letterSpace, float interval)
+    public void Setting(string message, float letterSpace, float interval, float childWidth = 100)
     {
         mMessage = message; mLetterSpace = letterSpace; mInterval = interval;
+
+        if (_LayoutGroup == null)
+        {
+            _LayoutGroup = gameObject.AddComponent<HorizontalLayoutGroup>();
+        }
+        _LayoutGroup.spacing = letterSpace - childWidth;
+        _LayoutGroup.padding.left = (int)(message.Length * letterSpace * -0.5f);
     }
 
     private void OnEnable()

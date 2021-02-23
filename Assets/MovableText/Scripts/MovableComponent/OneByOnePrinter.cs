@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrintOneByOne : MonoBehaviour
+public class OneByOnePrinter : MonoBehaviour
 {
     public bool InvokeOnAwake;
     
@@ -84,5 +84,6 @@ public class PrintOneByOne : MonoBehaviour
                 array[i].transform.localPosition += (Vector3)translate;
             }
         }
+        _PrintRoutine = null;
     }
 }

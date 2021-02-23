@@ -16,6 +16,10 @@ public class PrintOneByOne : MonoBehaviour
 
     private IEnumerator _PrintRoutine;
 
+    private void Reset()
+    {
+        TryGetComponent(out Owner);
+    }
     private void Awake()
     {
         if (InvokeOnAwake)
@@ -33,6 +37,8 @@ public class PrintOneByOne : MonoBehaviour
     }
     private IEnumerator PrintRoutine()
     {
+        string message = Owner.Message;
+
         var array = Owner.GetMovableObjects();
 
         for (int i = 0; i < array.Length; i++)
@@ -59,12 +65,23 @@ public class PrintOneByOne : MonoBehaviour
                     return Time.deltaTime;
             }
         }
-        for (int i = 0; i < array.Length; ++i)
+        int iteration = 0;
+
+        while (iteration < array.Length)
         {
-            for (float time = 0; time < IntervalTime; time += DeltaTime())
+            for (float i = 0f; i < IntervalTime; i += DeltaTime())
             {
-                array[i].gameObject.SetActive(true);
                 yield return null;
+            }
+            array[iteration++].gameObject.SetActive(true);
+
+            for (int i = 0; i < iteration; i++)
+            {
+                Vector2 translate = ((i == iteration - 1) ? Vector2.right * i : Vector2.left) * LetterSpace * 0.5f;
+
+                array[i].PivotPoint += translate;
+
+                array[i].transform.localPosition += (Vector3)translate;
             }
         }
     }

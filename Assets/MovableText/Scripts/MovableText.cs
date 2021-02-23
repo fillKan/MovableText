@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
-public enum FadeType 
-{
-    None, In, Out 
-}
+
 [System.Serializable]
 public struct MovCharInfo
 {
@@ -39,17 +36,6 @@ public struct MovCharInfo
     }
 }
 
-[System.Serializable]
-public struct FadeCInfo
-{
-    public FadeType FadeType;
-
-    public float FadeTime;
-
-    public bool IsUsingTimeScale;
-    public bool IsFadedDisable;
-}
-
 public class MovableText : MonoBehaviour
 {
     [SerializeField][TextArea]
@@ -67,12 +53,6 @@ public class MovableText : MonoBehaviour
     public  MovCharInfo GetTextInfo => mTextInfo;
     [SerializeField]
     private MovCharInfo mTextInfo;
-
-    public  FadeCInfo GetFadeInfo => mFadeInfo;
-    [SerializeField]
-    private FadeCInfo mFadeInfo;
-
-    private IEnumerator mEFading;
 
     public MovableObject[] GetMovableObjects()
     {
@@ -92,7 +72,6 @@ public class MovableText : MonoBehaviour
 
     public void Setting(string message) => mMessage = message;
     public void Setting(MovCharInfo info) => mTextInfo = info;
-    public void Setting(FadeCInfo info) => mFadeInfo = info;
     public void Setting(string message, float letterSpace, float childWidth = 100)
     {
         mMessage = message; _LetterSpace = letterSpace;
@@ -101,7 +80,6 @@ public class MovableText : MonoBehaviour
     private void OnEnable()
     {
         CheckMovObjectArray();
-        CastFading();
     }
 
     private void Update()
@@ -111,50 +89,6 @@ public class MovableText : MonoBehaviour
             _MovObjectArray[i].UpdateMe();
         }
     }
-
-    private void CastFading()
-    {
-        if (mEFading != null) {
-            StopCoroutine(mEFading); mEFading = null;
-        }
-        StartCoroutine(mEFading = EFading(mFadeInfo.FadeType));
-    }
-    private IEnumerator EFading(FadeType fadeType)
-    {
-        float sumTime = 0f;
-
-        while (sumTime / mFadeInfo.FadeTime < 1f)
-        {
-            sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
-
-            Color lerpColor = mTextInfo.color;
-
-            switch (fadeType)
-            {
-                case FadeType.In:
-                    lerpColor.a = Mathf.Lerp(0f, 1f, sumTime / mFadeInfo.FadeTime);
-                    break;
-
-                case FadeType.Out:
-                    lerpColor.a = Mathf.Lerp(1f, 0f, sumTime / mFadeInfo.FadeTime);
-                    break;
-            }
-            for (int i = 0; i < _MovObjectArray.Length; i++)
-            {
-                if (_MovObjectArray[i].TryGetComponent(out Text text))
-                {
-                    text.color = lerpColor;
-                }
-            }
-            yield return null;
-        }
-        if (fadeType.Equals(FadeType.Out) && mFadeInfo.IsFadedDisable)
-        {
-            gameObject.SetActive(false);
-        }
-        yield break;
-    }
-
     private void CheckMovObjectArray()
     {
         if (_MovObjectArray == null)

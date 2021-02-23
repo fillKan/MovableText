@@ -13,8 +13,6 @@ public class TextDetailEditor : EditorWindow
 
     private bool mIsPrinOnebyOne;
 
-    private FadeCInfo mFadeInfo;
-
     [MenuItem("Tools/Movable Text/Edit Text Detail")]
     private static void Init()
     {
@@ -36,7 +34,6 @@ public class TextDetailEditor : EditorWindow
                 mMessage = mUnstable.Message;
 
                 mLetterSpace = mUnstable.LetterSpace;
-                mFadeInfo = mUnstable.GetFadeInfo;
             }
             else
             {
@@ -59,22 +56,6 @@ public class TextDetailEditor : EditorWindow
 
         mIsPrinOnebyOne = EditorGUILayout.Toggle("Print-OnebyOne", mIsPrinOnebyOne);
 
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        GUILayout.Label("Fading Option", EditorStyles.boldLabel);
-        GUILayout.Space(2.5f);
-
-        GUILayout.Label("Fade Type", EditorStyles.label);
-        mFadeInfo.FadeType = (FadeType)EditorGUILayout.EnumPopup(mFadeInfo.FadeType);
-
-        GUILayout.Label("Fade Time", EditorStyles.label);
-        mFadeInfo.FadeTime = EditorGUILayout.FloatField(mFadeInfo.FadeTime);
-
-        mFadeInfo.IsUsingTimeScale = 
-        EditorGUILayout.Toggle("Is Using Time Scale", mFadeInfo.IsUsingTimeScale);
-
-        mFadeInfo.IsFadedDisable =
-        EditorGUILayout.Toggle("Is Faded Disable", mFadeInfo.IsFadedDisable);
-
         GUILayout.Space(3f);
 
         if (GUILayout.Button("Apply") && mUnstable != null)
@@ -82,8 +63,6 @@ public class TextDetailEditor : EditorWindow
             Undo.RecordObject(mUnstable, "Apply");
 
             mUnstable.Setting(mMessage, mLetterSpace);
-
-            mUnstable.Setting(mFadeInfo);
         }
     }
 }

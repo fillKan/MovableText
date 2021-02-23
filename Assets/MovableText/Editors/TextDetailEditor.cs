@@ -36,11 +36,7 @@ public class TextDetailEditor : EditorWindow
                 mMessage = mUnstable.Message;
 
                 mLetterSpace = mUnstable.LetterSpace;
-                mInterval    = mUnstable.Interval;
-
                 mFadeInfo = mUnstable.GetFadeInfo;
-
-                mIsPrinOnebyOne = mUnstable.IsPrintOnebyOne;
             }
             else
             {
@@ -85,11 +81,9 @@ public class TextDetailEditor : EditorWindow
         {
             Undo.RecordObject(mUnstable, "Apply");
 
-            mUnstable.Setting(mMessage, mLetterSpace, mInterval);
+            mUnstable.Setting(mMessage, mLetterSpace);
 
             mUnstable.Setting(mFadeInfo);
-
-            mUnstable.IsPrintOnebyOne = mIsPrinOnebyOne;
         }
     }
 }

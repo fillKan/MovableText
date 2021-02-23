@@ -59,20 +59,10 @@ public class MovableText : MonoBehaviour
 
     private MovableObject[] _MovObjectArray;
 
-    #region Print OnebyOne variables
-
-    public bool IsPrintOnebyOne;
-
-    private IEnumerator mEOutputOnebyOne;
-
     public float LetterSpace 
-    { get => mLetterSpace; }
-    public float Interval 
-    { get => mInterval; }
+    { get => _LetterSpace; }
 
-    [SerializeField] private float mLetterSpace;
-    [SerializeField] private float mInterval;
-    #endregion
+    [SerializeField] private float _LetterSpace;
 
     public  MovCharInfo GetTextInfo => mTextInfo;
     [SerializeField]
@@ -103,35 +93,15 @@ public class MovableText : MonoBehaviour
     public void Setting(string message) => mMessage = message;
     public void Setting(MovCharInfo info) => mTextInfo = info;
     public void Setting(FadeCInfo info) => mFadeInfo = info;
-    public void Setting(string message, float letterSpace, float interval, float childWidth = 100)
+    public void Setting(string message, float letterSpace, float childWidth = 100)
     {
-        mMessage = message; mLetterSpace = letterSpace; mInterval = interval;
+        mMessage = message; _LetterSpace = letterSpace;
     }
 
     private void OnEnable()
     {
         CheckMovObjectArray();
-
-        if (IsPrintOnebyOne) {
-
-            for (int i = 0; i < _MovObjectArray.Length; i++)
-            {
-                _MovObjectArray[i].gameObject.SetActive(false);
-
-                _MovObjectArray[i].transform.localPosition = Vector2.zero;
-            }
-            StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());           
-        }
         CastFading();
-    }
-
-    private void OnDisable()
-    {
-        if (mEOutputOnebyOne != null) {
-            StopCoroutine(mEOutputOnebyOne);
-        }
-        mEOutputOnebyOne = null;
-
     }
 
     private void Update()
@@ -185,28 +155,6 @@ public class MovableText : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator EOutputOnebyOne()
-    {
-        int iteration = 0;
-        
-        while (iteration < mMessage.Length)
-        {
-            for (float i = 0f; i < mInterval; i += Time.deltaTime * Time.timeScale) {
-                yield return null;
-            }
-            _MovObjectArray[iteration++].gameObject.SetActive(true);
-
-            for (int i = 0; i < iteration; i++)
-            {
-                Vector2 translate = ((i == iteration - 1) ? Vector2.right * i : Vector2.left) * mLetterSpace * 0.5f;
-
-                _MovObjectArray[i].PivotPoint += translate;
-
-                _MovObjectArray[i].transform.localPosition += (Vector3)translate;
-            }
-        }        
-        yield break;
-    }
     private void CheckMovObjectArray()
     {
         if (_MovObjectArray == null)

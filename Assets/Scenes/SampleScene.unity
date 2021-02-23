@@ -2417,9 +2417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mMessage: "\uC548 \uB420\uAC83\uB3C4 \uB418\uAC8C\uD558\uB798\uC11C \uB09C \uB418\uAC8C\uD588\uB354\uB2C8
     \uB410\uB2E4\uACE0 \uD558\uB124"
-  IsPrintOnebyOne: 0
-  mLetterSpace: 40
-  mInterval: 0
+  _LetterSpace: 40
   mTextInfo:
     waitFrame: 6
     color: {r: 1, g: 1, b: 1, a: 1}

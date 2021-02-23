@@ -37,8 +37,6 @@ public class OneByOnePrinter : MonoBehaviour
     }
     private IEnumerator PrintRoutine()
     {
-        string message = Owner.Message;
-
         var array = Owner.GetMovableObjects();
 
         for (int i = 0; i < array.Length; i++)
@@ -73,15 +71,26 @@ public class OneByOnePrinter : MonoBehaviour
             {
                 yield return null;
             }
-            array[iteration++].gameObject.SetActive(true);
+            array[iteration].transform.localPosition = Vector2.zero;
+            array[iteration].gameObject.SetActive(true);
 
+            iteration++;
             for (int i = 0; i < iteration; i++)
             {
-                Vector2 translate = ((i == iteration - 1) ? Vector2.right * i : Vector2.left) * LetterSpace * 0.5f;
+                Vector2 translate;
 
+                if (i == iteration - 1)
+                {
+                    translate = Vector2.right * i;
+                }
+                else
+                {
+                    translate = Vector2.left;
+                }
+                translate *= LetterSpace * 0.5f;
+
+                array[i].transform.Translate(translate, Space.Self);
                 array[i].PivotPoint += translate;
-
-                array[i].transform.localPosition += (Vector3)translate;
             }
         }
         _PrintRoutine = null;

@@ -77,7 +77,10 @@ public class MovableText : MonoBehaviour
     {
         for (int i = 0; i < _MovObjectArray.Length; ++i)
         {
-            _MovObjectArray[i].UpdateMe();
+            if (_MovObjectArray[i].gameObject.activeSelf)
+            {
+                _MovObjectArray[i].UpdateMe();
+            }
         }
     }
     public MovableObject[] GetMovableObjects()

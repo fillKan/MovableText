@@ -9,7 +9,10 @@ public class Gradient : MonoBehaviour
     
     [Header("Gradient Property")]
     public float ProgressingTime;
-    public Color GradientColor = Color.white;
+    public AnimationCurve GradientCurve;
+
+    [SerializeField, Tooltip("value range : 0 ~ 1")] 
+    private Color GradientColor = Color.white;
     public AnimatorUpdateMode UpdateMode;
 
     [Header("User Property")]
@@ -95,10 +98,12 @@ public class Gradient : MonoBehaviour
         for (float i = 0; GradientPercent < 1f; i += DeltaTime())
         {
             GradientPercent = Mathf.Clamp(i / ProgressingTime, 0f, 1f);
-
+            
+            float ratio = GradientCurve.Evaluate(GradientPercent);
+            
             for (int index = 0; index < _TextArray.Length; index++)
             {
-                _TextArray[index].color = Color.Lerp(textColor[index], GradientColor, GradientPercent);
+                _TextArray[index].color = Color.Lerp(textColor[index], GradientColor, ratio);
             }
             yield return null;
         }

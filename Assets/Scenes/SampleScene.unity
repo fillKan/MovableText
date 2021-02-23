@@ -2418,7 +2418,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InvokeOnAwake: 1
   ProgressingTime: 5
-  GradientColor: {r: 1, g: 0, b: 0, a: 1}
+  GradientCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  GradientColor: {r: 0.5488663, g: 0.5566038, b: 0.26254895, a: 1}
   UpdateMode: 0
   Owner: {fileID: 1790598932}
 --- !u!114 &1790598932

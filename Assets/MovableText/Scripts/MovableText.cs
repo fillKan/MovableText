@@ -38,28 +38,12 @@ public struct MovCharInfo
 
 public class MovableText : MonoBehaviour
 {
-    [SerializeField][TextArea]
-    private string mMessage;
-    public  string  Message
-    { get => mMessage; }
-
-    private MovableObject[] _MovObjectArray;
-
-    public float LetterSpace 
-    { get => _LetterSpace; }
-
+    [TextArea]
+    [SerializeField] private string _Message;
     [SerializeField] private float _LetterSpace;
+    [SerializeField] private MovCharInfo _TextInfo;
 
-    public  MovCharInfo GetTextInfo => mTextInfo;
-    [SerializeField]
-    private MovCharInfo mTextInfo;
-
-    public MovableObject[] GetMovableObjects()
-    {
-        CheckMovObjectArray();
-
-        return _MovObjectArray;
-    }
+    /* ====== ====== public property ====== ====== */
     public MovableObject this[int index]
     {
         get
@@ -69,25 +53,43 @@ public class MovableText : MonoBehaviour
             return _MovObjectArray[Mathf.Clamp(index, 0, _MovObjectArray.Length - 1)];
         }
     }
-
-    public void Setting(string message) => mMessage = message;
-    public void Setting(MovCharInfo info) => mTextInfo = info;
-    public void Setting(string message, float letterSpace, float childWidth = 100)
+    public string Message 
     {
-        mMessage = message; _LetterSpace = letterSpace;
+        get => _Message; 
     }
+    public float LetterSpace 
+    {
+        get => _LetterSpace; 
+    }
+    public MovCharInfo GetTextInfo
+    {
+        get => _TextInfo;
+    }
+    /* ====== ====== public property ====== ====== */
+
+    private MovableObject[] _MovObjectArray;
 
     private void OnEnable()
     {
         CheckMovObjectArray();
     }
-
     private void Update()
     {
         for (int i = 0; i < _MovObjectArray.Length; ++i)
         {
             _MovObjectArray[i].UpdateMe();
         }
+    }
+    public MovableObject[] GetMovableObjects()
+    {
+        CheckMovObjectArray();
+
+        return _MovObjectArray;
+    }
+    public void Setting(MovCharInfo info) => _TextInfo = info;
+    public void Setting(string message, float letterSpace)
+    {
+        _Message = message; _LetterSpace = letterSpace;
     }
     private void CheckMovObjectArray()
     {

@@ -2457,10 +2457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baadd095d73f4fc43bf22dbea411f211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMessage: "\uC548 \uB420\uAC83\uB3C4 \uB418\uAC8C\uD558\uB798\uC11C \uB09C \uB418\uAC8C\uD588\uB354\uB2C8
+  _Message: "\uC548 \uB420\uAC83\uB3C4 \uB418\uAC8C\uD558\uB798\uC11C \uB09C \uB418\uAC8C\uD588\uB354\uB2C8
     \uB410\uB2E4\uACE0 \uD558\uB124"
   _LetterSpace: 40
-  mTextInfo:
+  _TextInfo:
     waitFrame: 6
     color: {r: 1, g: 1, b: 1, a: 1}
     fontStyle: 0
@@ -2469,11 +2469,6 @@ MonoBehaviour:
     fontSize: 52
     rotation: 5
     vibration: 1.3
-  mFadeInfo:
-    FadeType: 0
-    FadeTime: 0
-    IsUsingTimeScale: 0
-    IsFadedDisable: 0
 --- !u!114 &1790598933
 MonoBehaviour:
   m_ObjectHideFlags: 0

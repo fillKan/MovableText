@@ -9,10 +9,11 @@ public class Gradient : MonoBehaviour
     
     [Header("Gradient Property")]
     public float ProgressingTime;
-    public AnimationCurve GradientCurve;
 
-    [SerializeField, Tooltip("value range : 0 ~ 1")] 
-    private Color GradientColor = Color.white;
+    [SerializeField, Tooltip("value range : 0 ~ 1")]
+    private AnimationCurve GradientCurve;
+
+    public Color GradientColor = Color.white;
     public AnimatorUpdateMode UpdateMode;
 
     [Header("User Property")]

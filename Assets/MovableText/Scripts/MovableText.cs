@@ -86,6 +86,18 @@ public class MovableText : MonoBehaviour
 
     private IEnumerator mEFading;
 
+    public MovableObject[] GetMovableObjects()
+    {
+        return _MovObjectArray;
+    }
+    public MovableObject this[int index]
+    {
+        get
+        {
+            return _MovObjectArray[Mathf.Clamp(index, 0, _MovObjectArray.Length - 1)];
+        }
+    }
+
     public void Setting(string message) => mMessage = message;
     public void Setting(MovCharInfo info) => mTextInfo = info;
     public void Setting(FadeCInfo info) => mFadeInfo = info;

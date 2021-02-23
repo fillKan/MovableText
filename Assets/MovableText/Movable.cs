@@ -6,7 +6,7 @@ public static class MovableExtension
 {
     public static bool IsEven(this int num)
     {
-        return (Mathf.Abs(num) & 1) == 1;
+        return (Mathf.Abs(num) & 1) == 0;
     }
     #region COMMENT
     /// <summary>

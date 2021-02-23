@@ -83,7 +83,7 @@ public class MessageEditor : EditorWindow
         MovCharInfo unstCInfo 
             = new MovCharInfo(mColor, mFontStyle, mFont, new MovableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
 
-        unstableText.Setting(mMessage, mLetterSpacing, 0f);
+        unstableText.Setting(mMessage, mLetterSpacing);
         unstableText.Setting(unstCInfo);
 
         for (int i = 0; i < mMessage.Length; i++)

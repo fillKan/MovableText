@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
-public enum FadeType 
-{
-    None, In, Out 
-}
+
 [System.Serializable]
 public struct MovCharInfo
 {
@@ -39,159 +36,63 @@ public struct MovCharInfo
     }
 }
 
-[System.Serializable]
-public struct FadeCInfo
-{
-    public FadeType FadeType;
-
-    public float FadeTime;
-
-    public bool IsUsingTimeScale;
-    public bool IsFadedDisable;
-}
-
 public class MovableText : MonoBehaviour
 {
-    [SerializeField][TextArea]
-    private string mMessage;
-    public  string  Message
-    { get => mMessage; }
+    [TextArea]
+    [SerializeField] private string _Message;
+    [SerializeField] private float _LetterSpace;
+    [SerializeField] private MovCharInfo _TextInfo;
+
+    /* ====== ====== public property ====== ====== */
+    public MovableObject this[int index]
+    {
+        get
+        {
+            CheckMovObjectArray();
+
+            return _MovObjectArray[Mathf.Clamp(index, 0, _MovObjectArray.Length - 1)];
+        }
+    }
+    public string Message 
+    {
+        get => _Message; 
+    }
+    public float LetterSpace 
+    {
+        get => _LetterSpace; 
+    }
+    public MovCharInfo GetTextInfo
+    {
+        get => _TextInfo;
+    }
+    /* ====== ====== public property ====== ====== */
 
     private MovableObject[] _MovObjectArray;
-
-    #region Print OnebyOne variables
-
-    public bool IsPrintOnebyOne;
-
-    private IEnumerator mEOutputOnebyOne;
-
-    public float LetterSpace 
-    { get => mLetterSpace; }
-    public float Interval 
-    { get => mInterval; }
-
-    [SerializeField] private float mLetterSpace;
-    [SerializeField] private float mInterval;
-    #endregion
-
-    public  MovCharInfo GetTextInfo => mTextInfo;
-    [SerializeField]
-    private MovCharInfo mTextInfo;
-
-    public  FadeCInfo GetFadeInfo => mFadeInfo;
-    [SerializeField]
-    private FadeCInfo mFadeInfo;
-
-    private IEnumerator mEFading;
-
-    public void Setting(string message) => mMessage = message;
-
-    public void Setting(MovCharInfo info) => mTextInfo = info;
-    public void Setting(FadeCInfo info) => mFadeInfo = info;
-
-    public void Setting(string message, float letterSpace, float interval)
-    {
-        mMessage = message; mLetterSpace = letterSpace; mInterval = interval;
-    }
 
     private void OnEnable()
     {
         CheckMovObjectArray();
-
-        if (IsPrintOnebyOne) {
-
-            for (int i = 0; i < _MovObjectArray.Length; i++)
-            {
-                _MovObjectArray[i].gameObject.SetActive(false);
-
-                _MovObjectArray[i].transform.localPosition = Vector2.zero;
-            }
-            StartCoroutine(mEOutputOnebyOne = EOutputOnebyOne());           
-        }
-        CastFading();
     }
-
-    private void OnDisable()
-    {
-        if (mEOutputOnebyOne != null) {
-            StopCoroutine(mEOutputOnebyOne);
-        }
-        mEOutputOnebyOne = null;
-
-    }
-
     private void Update()
     {
         for (int i = 0; i < _MovObjectArray.Length; ++i)
         {
-            _MovObjectArray[i].UpdateMe();
+            if (_MovObjectArray[i].gameObject.activeSelf)
+            {
+                _MovObjectArray[i].UpdateMe();
+            }
         }
     }
-
-    private void CastFading()
+    public MovableObject[] GetMovableObjects()
     {
-        if (mEFading != null) {
-            StopCoroutine(mEFading); mEFading = null;
-        }
-        StartCoroutine(mEFading = EFading(mFadeInfo.FadeType));
+        CheckMovObjectArray();
+
+        return _MovObjectArray;
     }
-    private IEnumerator EFading(FadeType fadeType)
+    public void Setting(MovCharInfo info) => _TextInfo = info;
+    public void Setting(string message, float letterSpace)
     {
-        float sumTime = 0f;
-
-        while (sumTime / mFadeInfo.FadeTime < 1f)
-        {
-            sumTime += Time.deltaTime * (mFadeInfo.IsUsingTimeScale ? Time.timeScale : 1f);
-
-            Color lerpColor = mTextInfo.color;
-
-            switch (fadeType)
-            {
-                case FadeType.In:
-                    lerpColor.a = Mathf.Lerp(0f, 1f, sumTime / mFadeInfo.FadeTime);
-                    break;
-
-                case FadeType.Out:
-                    lerpColor.a = Mathf.Lerp(1f, 0f, sumTime / mFadeInfo.FadeTime);
-                    break;
-            }
-            for (int i = 0; i < _MovObjectArray.Length; i++)
-            {
-                if (_MovObjectArray[i].TryGetComponent(out Text text))
-                {
-                    text.color = lerpColor;
-                }
-            }
-            yield return null;
-        }
-        if (fadeType.Equals(FadeType.Out) && mFadeInfo.IsFadedDisable)
-        {
-            gameObject.SetActive(false);
-        }
-        yield break;
-    }
-
-    private IEnumerator EOutputOnebyOne()
-    {
-        int iteration = 0;
-        
-        while (iteration < mMessage.Length)
-        {
-            for (float i = 0f; i < mInterval; i += Time.deltaTime * Time.timeScale) {
-                yield return null;
-            }
-            _MovObjectArray[iteration++].gameObject.SetActive(true);
-
-            for (int i = 0; i < iteration; i++)
-            {
-                Vector2 translate = ((i == iteration - 1) ? Vector2.right * i : Vector2.left) * mLetterSpace * 0.5f;
-
-                _MovObjectArray[i].PivotPoint += translate;
-
-                _MovObjectArray[i].transform.localPosition += (Vector3)translate;
-            }
-        }        
-        yield break;
+        _Message = message; _LetterSpace = letterSpace;
     }
     private void CheckMovObjectArray()
     {

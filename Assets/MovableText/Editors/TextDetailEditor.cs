@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TextDetailEditor : EditorWindow
 {
-    private UnstableText mUnstable;
+    private MovableText mUnstable;
 
     private string mMessage;
 
@@ -13,9 +13,7 @@ public class TextDetailEditor : EditorWindow
 
     private bool mIsPrinOnebyOne;
 
-    private FadeCInfo mFadeInfo;
-
-    [MenuItem("Tools/Unstable Text/Edit Text Detail")]
+    [MenuItem("Tools/Movable Text/Edit Text Detail")]
     private static void Init()
     {
         TextDetailEditor window = EditorWindow.GetWindow(typeof(TextDetailEditor)) as TextDetailEditor;
@@ -26,7 +24,7 @@ public class TextDetailEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Space(8f);
-        mUnstable = (UnstableText)EditorGUILayout.ObjectField("Edit Target", mUnstable, typeof(UnstableText), true);
+        mUnstable = (MovableText)EditorGUILayout.ObjectField("Edit Target", mUnstable, typeof(MovableText), true);
         GUILayout.Space(2f);
 
         if (GUILayout.Button("Extraction"))
@@ -36,11 +34,6 @@ public class TextDetailEditor : EditorWindow
                 mMessage = mUnstable.Message;
 
                 mLetterSpace = mUnstable.LetterSpace;
-                mInterval    = mUnstable.Interval;
-
-                mFadeInfo = mUnstable.GetFadeInfo;
-
-                mIsPrinOnebyOne = mUnstable.IsPrintOnebyOne;
             }
             else
             {
@@ -63,33 +56,13 @@ public class TextDetailEditor : EditorWindow
 
         mIsPrinOnebyOne = EditorGUILayout.Toggle("Print-OnebyOne", mIsPrinOnebyOne);
 
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        GUILayout.Label("Fading Option", EditorStyles.boldLabel);
-        GUILayout.Space(2.5f);
-
-        GUILayout.Label("Fade Type", EditorStyles.label);
-        mFadeInfo.FadeType = (FadeType)EditorGUILayout.EnumPopup(mFadeInfo.FadeType);
-
-        GUILayout.Label("Fade Time", EditorStyles.label);
-        mFadeInfo.FadeTime = EditorGUILayout.FloatField(mFadeInfo.FadeTime);
-
-        mFadeInfo.IsUsingTimeScale = 
-        EditorGUILayout.Toggle("Is Using Time Scale", mFadeInfo.IsUsingTimeScale);
-
-        mFadeInfo.IsFadedDisable =
-        EditorGUILayout.Toggle("Is Faded Disable", mFadeInfo.IsFadedDisable);
-
         GUILayout.Space(3f);
 
         if (GUILayout.Button("Apply") && mUnstable != null)
         {
             Undo.RecordObject(mUnstable, "Apply");
 
-            mUnstable.Setting(mMessage, mLetterSpace, mInterval);
-
-            mUnstable.Setting(mFadeInfo);
-
-            mUnstable.IsPrintOnebyOne = mIsPrinOnebyOne;
+            mUnstable.Setting(mMessage, mLetterSpace);
         }
     }
 }

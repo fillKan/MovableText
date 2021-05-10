@@ -21,9 +21,9 @@ public class MessageEditor : EditorWindow
     private Color mColor = Color.white;
 
     private FontStyle mFontStyle = FontStyle.Normal;
-    private UnstableStyle mUnstable = UnstableStyle.Rotation;
+    private MovableStyle mUnstable = MovableStyle.Rotation;
 
-    [MenuItem("Tools/Unstable Text/Create")]
+    [MenuItem("Tools/Movable Text/Create")]
     private static void Init()
     {
         MessageEditor window = EditorWindow.GetWindow(typeof(MessageEditor)) as MessageEditor;
@@ -56,7 +56,7 @@ public class MessageEditor : EditorWindow
         mFontSize = EditorGUILayout.IntField(mFontSize);
 
         mFontStyle = (FontStyle)EditorGUILayout.EnumPopup("Font Style", mFontStyle);
-        mUnstable = (UnstableStyle)EditorGUILayout.EnumPopup("Unstable Style", mUnstable);
+        mUnstable = (MovableStyle)EditorGUILayout.EnumPopup("Unstable Style", mUnstable);
 
         GUILayout.Label("Vibration", EditorStyles.label);
         mVibration = EditorGUILayout.Slider(mVibration, 0.01f, 3f);
@@ -78,17 +78,17 @@ public class MessageEditor : EditorWindow
     }
     private void Create()
     {
-        UnstableText unstableText = Unst.RegisterTextObject(mName, mCanvas, mPosition);
+        MovableText unstableText = Movable.CreateMovableText(mName, mCanvas, mPosition);
 
-        UnstCInfo unstCInfo 
-            = new UnstCInfo(mColor, mFontStyle, mFont, new UnstableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
+        MovCharInfo unstCInfo 
+            = new MovCharInfo(mColor, mFontStyle, mFont, new MovableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
 
-        unstableText.Setting(mMessage, mLetterSpacing, 0f);
+        unstableText.Setting(mMessage, mLetterSpacing);
         unstableText.Setting(unstCInfo);
 
         for (int i = 0; i < mMessage.Length; i++)
         {
-            UnstableObject createChar = Unst.RegisterCharObject(i, mMessage[i], unstCInfo);
+            MovableObject createChar = Movable.CreateMovableChar(i, mMessage[i], unstCInfo);
 
             createChar.transform.parent = unstableText.transform;
             createChar.transform.SetLetterSpace(mMessage.Length, mLetterSpacing, i);

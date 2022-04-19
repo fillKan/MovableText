@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 public static class MovableExtension
 {
@@ -21,49 +20,5 @@ public static class MovableExtension
         float charOffset = messageLength.IsEven() ? space / 2 : 0f;
 
         transform.localPosition = Vector2.right * ((-messageLength / 2 + index) * space + charOffset);
-    }
-}
-public class Movable
-{
-    public static MovableText CreateMovableText(string name, Canvas parent, Vector3 position)
-    {
-        GameObject @object = new GameObject(name, typeof(RectTransform), typeof(MovableText));
-
-        Undo.RegisterCreatedObjectUndo(@object, name);
-
-                   @object.transform.parent        = parent.transform;
-                   @object.transform.localPosition = position;
-
-        Debug.Assert(@object.TryGetComponent(out MovableText movable));
-
-        return movable;
-    }
-
-    public static MovableObject CreateMovableChar(int index, char letter, MovCharInfo cInfo)
-    {
-        string name = $"Character[{index}]";
-
-        GameObject newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(MovableObject));
-
-        Undo.RegisterCreatedObjectUndo(newObject, name);
-
-        if (newObject.TryGetComponent(out Text text))
-        {
-            text.fontSize  = cInfo.fontSize;          
-            text.fontStyle = cInfo.fontStyle;
-
-            text.color     = cInfo.color;
-            text.alignment = TextAnchor.MiddleCenter;
-
-            text.text = letter.ToString();
-            text.font = cInfo.font; 
-        }
-        if (newObject.TryGetComponent(out MovableObject movable)) 
-        {
-            movable.Setting(cInfo.waitFrame, cInfo.vibration, cInfo.rotation, cInfo.movableStyle);
-
-            return movable;
-        }
-        return null;
     }
 }

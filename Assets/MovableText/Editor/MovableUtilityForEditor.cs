@@ -32,7 +32,7 @@ public static class MovableUtilityForEditor
         return mov.GetComponent<MovableText>();
     }
 
-    public static MovableObject CreateMovableChar(int index, char letter, MovCharInfo cInfo)
+    public static MovableObject CreateMovableChar(int index, char letter, MovableStyle cInfo)
     {
         string name = string.Format(CHAR_OBJECT_NAME_FORMAT, index.ToString("00"));
         var newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(MovableObject));

@@ -2,44 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct MovCharInfo
-{
-    public uint waitFrame;
-
-    public Color color;
-
-    public FontStyle fontStyle;
-
-    public MovableStyle movableStyle;
-
-    public Font font;
-
-    public int   fontSize;
-    public float rotation;
-    public float vibration;
-
-    public MovCharInfo(Color color, FontStyle fontStyle, Font font, MovableObject movableObject, int fontSize)
-    {
-        this.color     = color;
-        this.fontStyle = fontStyle;
-        this.font      = font;
-        this.fontSize  = fontSize;
-
-        rotation  = movableObject.Rotation;
-        vibration = movableObject.Vibration;
-        waitFrame = movableObject.WaitFrame;
-
-        movableStyle = movableObject.Style;
-    }
-}
-
 public class MovableText : MonoBehaviour
 {
     [TextArea]
     [SerializeField] private string _Message;
     [SerializeField] private float _LetterSpace;
-    [SerializeField] private MovCharInfo _TextInfo;
+    [SerializeField] private MovableStyle _TextInfo;
 
     /* ====== ====== public property ====== ====== */
     public MovableObject this[int index]
@@ -59,7 +27,7 @@ public class MovableText : MonoBehaviour
     {
         get => _LetterSpace; 
     }
-    public MovCharInfo GetTextInfo
+    public MovableStyle GetTextInfo
     {
         get => _TextInfo;
     }
@@ -87,7 +55,7 @@ public class MovableText : MonoBehaviour
 
         return _MovObjectArray;
     }
-    public void Setting(MovCharInfo info) => _TextInfo = info;
+    public void Setting(MovableStyle info) => _TextInfo = info;
     public void Setting(string message, float letterSpace)
     {
         _Message = message; _LetterSpace = letterSpace;

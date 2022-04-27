@@ -21,7 +21,7 @@ public class MessageEditor : EditorWindow
     private Color mColor = Color.white;
 
     private FontStyle mFontStyle = FontStyle.Normal;
-    private MovableStyle mUnstable = MovableStyle.Rotation;
+    private MovableType mUnstable = MovableType.Rotation;
 
     [MenuItem("Tools/Movable Text/Create")]
     private static void Init()
@@ -56,7 +56,7 @@ public class MessageEditor : EditorWindow
         mFontSize = EditorGUILayout.IntField(mFontSize);
 
         mFontStyle = (FontStyle)EditorGUILayout.EnumPopup("Font Style", mFontStyle);
-        mUnstable = (MovableStyle)EditorGUILayout.EnumPopup("Unstable Style", mUnstable);
+        mUnstable = (MovableType)EditorGUILayout.EnumPopup("Unstable Style", mUnstable);
 
         GUILayout.Label("Vibration", EditorStyles.label);
         mVibration = EditorGUILayout.Slider(mVibration, 0.01f, 3f);
@@ -80,8 +80,8 @@ public class MessageEditor : EditorWindow
     {
         MovableText unstableText = MovableUtilityForEditor.CreateMovableText(mName, mCanvas, mPosition);
 
-        MovCharInfo unstCInfo 
-            = new MovCharInfo(mColor, mFontStyle, mFont, new MovableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
+        MovableStyle unstCInfo 
+            = new MovableStyle(mColor, mFontStyle, mFont, new MovableObject(mWaitFrame, mRotation, mVibration, mUnstable), mFontSize);
 
         unstableText.Setting(mMessage, mLetterSpacing);
         unstableText.Setting(unstCInfo);

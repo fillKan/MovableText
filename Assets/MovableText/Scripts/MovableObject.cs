@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum MovableStyle
-{
-    Rotation, Vibration, RotationAndVibration
-}
-
 public class MovableObject : MonoBehaviour
 {
     public uint WaitFrame;
@@ -16,18 +11,18 @@ public class MovableObject : MonoBehaviour
 
     public float Rotation;
     public float Vibration;
-    public MovableStyle Style;
+    public MovableType Style;
     public Vector2 PivotPoint;
 
-    public MovableObject(uint waitFrame, float rotation, float vibration, MovableStyle style) {
+    public MovableObject(uint waitFrame, float rotation, float vibration, MovableType style) {
         WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; Style = style;
     }
 
-    public void Setting(uint waitFrame, float vibration, float rotation, MovableStyle style) {
+    public void Setting(uint waitFrame, float vibration, float rotation, MovableType style) {
         WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; Style = style;
     }
 
-    public void Setting(MovCharInfo movCInfo)
+    public void Setting(MovableStyle movCInfo)
     {
         WaitFrame = movCInfo.waitFrame;
 
@@ -52,15 +47,15 @@ public class MovableObject : MonoBehaviour
         {
             switch (Style)
             {
-                case MovableStyle.Rotation:
+                case MovableType.Rotation:
                     transform.localRotation = Quaternion.Euler(Vector3.forward * Rotation * Random.Range(-1f, 1f));
                     break;
 
-                case MovableStyle.Vibration:
+                case MovableType.Vibration:
                     transform.localPosition = PivotPoint + Random.insideUnitCircle * Vibration;
                     break;
 
-                case MovableStyle.RotationAndVibration:
+                case MovableType.RotationAndVibration:
                     transform.localPosition = PivotPoint + Random.insideUnitCircle * Vibration;
                     transform.localRotation = Quaternion.Euler(Vector3.forward * Rotation * Random.Range(-1f, 1f));
                     break;

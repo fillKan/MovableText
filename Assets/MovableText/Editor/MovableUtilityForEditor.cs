@@ -7,6 +7,12 @@ public static class MovableUtilityForEditor
     private const string CHAR_OBJECT_NAME_FORMAT = "Character : {0}";
     private const string UNDO_PREFIX = "MovableUtilityForEditor : ";
 
+    /// <summary>
+    /// This method create a "MovableText". It's only works on unity-editor.
+    /// </summary>
+    /// <param name="name">Set the name of the object to be created</param>
+    /// <param name="canvas">The parents object. Reason for using canvas, cuz this object has ui element children.</param>
+    /// <param name="position">Set the position of an object. Exactly, localPosition on the canvas.</param>
     public static MovableText CreateMovableText(string name, Canvas canvas, Vector3 position)
     {
         // 변경사항들을 그룹으로 저장하기 시작.

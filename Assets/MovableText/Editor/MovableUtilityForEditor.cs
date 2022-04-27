@@ -24,8 +24,7 @@ public static class MovableUtilityForEditor
         string undoGroupName = string.Concat(UNDO_PREFIX, $"Create MovableText ({name}) completely");
 
         // 오브젝트 생성.
-        var mov = new GameObject(name, typeof(RectTransform), typeof(MovableText));
-        Undo.RegisterCreatedObjectUndo(mov, undoCreate);
+        var mov = CreateUIObject(name, undoCreate);
         Undo.SetTransformParent(mov.transform, canvas.transform, undoSetParent);
         
         // 객체의 계층 상태를 실행 취소 스택에 복사.
@@ -35,27 +34,35 @@ public static class MovableUtilityForEditor
         // 지금까지의 변경사항을 그룹으로 저장.
         Undo.SetCurrentGroupName(undoGroupName);
 
-        return mov.GetComponent<MovableText>();
+        return mov.AddComponent<MovableText>();
     }
 
     public static MovableObject CreateMovableChar(int index, char letter, MovableStyle style)
     {
-        string name = string.Format(CHAR_OBJECT_NAME_FORMAT, index.ToString("00"));
-        var newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(MovableObject));
+        var movName = string.Format(CHAR_OBJECT_NAME_FORMAT, index.ToString("00"));
+        var undoName = string.Concat(UNDO_PREFIX, $"Create MovableObject ({movName})");
 
-        Undo.RegisterCreatedObjectUndo(newObject, name);
+        // 오브젝트 생성.
+        var mov = CreateUIObject(movName, undoName);
+        
+        // 컴포넌트 설정 1.
+        var text = mov.AddComponent<Text>();
+        text.alignment = TextAnchor.MiddleCenter;
+        text.text = letter.ToString();
+        style.ApplyStyle(text);
 
-        if (newObject.TryGetComponent(out Text text))
-        {
-            style.ApplyStyle(text);
-            text.text = letter.ToString();
-            text.alignment = TextAnchor.MiddleCenter;
-        }
-        if (newObject.TryGetComponent(out MovableObject movable)) 
-        {
-            movable.Setting(style);
-            return movable;
-        }
-        return null;
+        // 컴포넌트 설정 2.
+        var movable = mov.AddComponent<MovableObject>();
+        movable.Setting(style);
+
+        return movable;
+    }
+
+    private static GameObject CreateUIObject(string name, string undoName)
+    {
+        var createObject = new GameObject(name, typeof(RectTransform));
+        Undo.RegisterCreatedObjectUndo(createObject, undoName);
+
+        return createObject;
     }
 }

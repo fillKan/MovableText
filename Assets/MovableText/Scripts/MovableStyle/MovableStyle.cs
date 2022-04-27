@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MovableType
 {
@@ -36,5 +37,13 @@ public class MovableStyle
         waitFrame = movableObject.WaitFrame;
 
         movableStyle = movableObject.Style;
+    }
+
+    public void ApplyStyle(Text text)
+    {
+        text.color      = this.color;
+        text.fontStyle  = this.fontStyle;
+        text.font       = this.font;
+        text.fontSize   = this.fontSize;
     }
 }

@@ -38,7 +38,7 @@ public static class MovableUtilityForEditor
         return mov.GetComponent<MovableText>();
     }
 
-    public static MovableObject CreateMovableChar(int index, char letter, MovableStyle cInfo)
+    public static MovableObject CreateMovableChar(int index, char letter, MovableStyle style)
     {
         string name = string.Format(CHAR_OBJECT_NAME_FORMAT, index.ToString("00"));
         var newObject = new GameObject(name, typeof(RectTransform), typeof(Text), typeof(MovableObject));
@@ -47,16 +47,13 @@ public static class MovableUtilityForEditor
 
         if (newObject.TryGetComponent(out Text text))
         {
-            text.fontSize   = cInfo.fontSize;          
-            text.fontStyle  = cInfo.fontStyle;
-            text.color      = cInfo.color;
-            text.alignment  = TextAnchor.MiddleCenter;
-            text.text       = letter.ToString();
-            text.font       = cInfo.font; 
+            style.ApplyStyle(text);
+            text.text = letter.ToString();
+            text.alignment = TextAnchor.MiddleCenter;
         }
         if (newObject.TryGetComponent(out MovableObject movable)) 
         {
-            movable.Setting(cInfo.waitFrame, cInfo.vibration, cInfo.rotation, cInfo.movableStyle);
+            movable.Setting(style.waitFrame, style.vibration, style.rotation, style.movableStyle);
 
             return movable;
         }

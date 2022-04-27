@@ -22,23 +22,14 @@ public class MovableObject : MonoBehaviour
         WaitFrame = waitFrame; Vibration = vibration; Rotation = rotation; Style = style;
     }
 
-    public void Setting(MovableStyle movCInfo)
+    public void Setting(MovableStyle style)
     {
-        WaitFrame = movCInfo.waitFrame;
+        WaitFrame = style.waitFrame;
 
-        Style = movCInfo.movableStyle;
+        Style = style.movableStyle;
 
-        Rotation  = movCInfo.rotation;
-        Vibration = movCInfo.vibration;
-
-        if (gameObject.TryGetComponent(out Text text))
-        {
-            text.color = movCInfo.color;
-            text.font  = movCInfo.font;
-
-            text.fontStyle = movCInfo.fontStyle;
-            text.fontSize  = movCInfo.fontSize;
-        }
+        Rotation  = style.rotation;
+        Vibration = style.vibration;
     }
 
     public void UpdateMe()

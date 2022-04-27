@@ -56,6 +56,7 @@ public class MovableTextEditor : Editor
                     Undo.RecordObject(text, "Apply to changed text");
 
                     text.text = movableText.Message[i].ToString();
+                    movableText.GetTextInfo.ApplyStyle(text);
                 }
             }
         }

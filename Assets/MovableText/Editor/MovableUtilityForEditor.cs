@@ -53,8 +53,7 @@ public static class MovableUtilityForEditor
         }
         if (newObject.TryGetComponent(out MovableObject movable)) 
         {
-            movable.Setting(style.waitFrame, style.vibration, style.rotation, style.movableStyle);
-
+            movable.Setting(style);
             return movable;
         }
         return null;
